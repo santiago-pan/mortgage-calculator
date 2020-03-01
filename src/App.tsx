@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import './App.css';
 import { DataTable } from './components/DataTable';
 import { Graph } from './components/Graph';
+import { Interest } from './components/Interest';
 import { Mortgage } from './components/Mortgage';
 import { MAX_NHG, MortgageCosts, NHG_FEE } from './components/MortgageCosts';
 import { IPMT, PMT, PPMT } from './Formulas';
@@ -144,7 +145,7 @@ const App = () => {
         <Row className="mb-3">
           <Col>
             <label className="mb-1">Mortage</label>
-            <Tabs defaultActiveKey="cost" id="figures-tab">
+            <Tabs defaultActiveKey="mortgage" id="figures-tab">
               <Tab eventKey="mortgage" title="Mortgage">
                 <Mortgage
                   price={state.price}
@@ -159,10 +160,7 @@ const App = () => {
                 <MortgageCosts {...state} loan={loan} onChange={handleChange} />
               </Tab>
               <Tab eventKey="overview" title="Interest">
-                <div>Interest</div>
-              </Tab>
-              <Tab eventKey="overview" title="Overview">
-                <div>Overview</div>
+                <Interest />
               </Tab>
             </Tabs>
           </Col>

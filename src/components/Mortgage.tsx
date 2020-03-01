@@ -64,7 +64,7 @@ export function Mortgage(props: Props) {
             title="Interest"
             prepend="%"
             value={props.interest}
-            onChange={value => props.onChange('interest', parseInt(value, 10))}
+            onChange={value => props.onChange('interest', parseFloat(value))}
           />
         </Col>
       </Row>
