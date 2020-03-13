@@ -68,7 +68,7 @@ export function Interest() {
       <thead>
         <tr>
           {intervals.map(interval => (
-            <th>{interval}</th>
+            <th key={interval}>{interval}</th>
           ))}
         </tr>
       </thead>
@@ -76,11 +76,11 @@ export function Interest() {
         {interests.map((interest, i) => {
           return (
             <tr key={i}>
-              {Object.values(interest).map((item, i) =>
+              {Object.values(interest).map((item, j) =>
                 i > 0 ? (
-                  <TableNumber value={item} suffix={'€'} />
+                  <TableNumber key={j} value={item} suffix={'€'} />
                 ) : (
-                  <TableNumber value={item} suffix={' years'} />
+                  <TableNumber key={j} value={item} suffix={' years'} />
                 ),
               )}
             </tr>
