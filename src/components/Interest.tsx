@@ -77,8 +77,8 @@ export function Interest() {
           return (
             <tr key={i}>
               {Object.values(interest).map((item, j) =>
-                i > 0 ? (
-                  <TableNumber key={j} value={item} suffix={'€'} />
+                j > 0 ? (
+                  <TableNumber key={j} value={item} suffix={'%'} />
                 ) : (
                   <TableNumber key={j} value={item} suffix={' years'} />
                 ),
