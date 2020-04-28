@@ -103,9 +103,7 @@ const App = () => {
     structuralSurvey: 800,
   });
 
-  const { loan, cost, percentaje } = calgulateLoan();
-
-  console.log('percentaje: ', percentaje);
+  const { loan, cost, percentage } = calgulateLoanFigures();
 
   const data = calculateData({ ...state }, loan);
   const annuity = calculateAnnuityData({ ...state }, loan);
@@ -114,7 +112,7 @@ const App = () => {
     setState({ ...state, [field]: value });
   }
 
-  function calgulateLoan(): { loan: number; cost: number; percentaje: number } {
+  function calgulateLoanFigures(): { loan: number; cost: number; percentage: number } {
     const bankGuarantee = 0.001 * state.price;
     const transferTax = 0.02 * state.price;
     const nhgAvailable = state.price > MAX_NHG ? false : true;
@@ -131,9 +129,9 @@ const App = () => {
     const loan =
       (state.price - state.savings + cost) / (nhgAvailable ? 1 - NHG_FEE : 1);
 
-    const percentaje = loan / state.price;
+    const percentage = loan / state.price;
 
-    return { loan, cost, percentaje };
+    return { loan, cost, percentage };
   }
 
   return (
@@ -157,6 +155,7 @@ const App = () => {
                   loan={loan}
                   cost={cost}
                   interest={state.interest}
+                  percentage={percentage}
                   onChange={handleChange}
                 />
               </Tab>
