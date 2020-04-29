@@ -92,7 +92,7 @@ function calculateData(data: State, loan: number): Array<Data> {
 const App = () => {
   const [state, setState] = useState<State>({
     price: 310000,
-    interest: 1.17,
+    interest: 1.34,
     taxReturn: 36.93,
     savings: 40000,
 
