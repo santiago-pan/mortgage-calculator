@@ -112,7 +112,11 @@ const App = () => {
     setState({ ...state, [field]: value });
   }
 
-  function calgulateLoanFigures(): { loan: number; cost: number; percentage: number } {
+  function calgulateLoanFigures(): {
+    loan: number;
+    cost: number;
+    percentage: number;
+  } {
     const bankGuarantee = 0.001 * state.price;
     const transferTax = 0.02 * state.price;
     const nhgAvailable = state.price > MAX_NHG ? false : true;

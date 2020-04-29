@@ -68,7 +68,7 @@ export function Interest() {
     <Table striped bordered hover size="sm">
       <thead>
         <tr>
-          {intervals.map(interval => (
+          {intervals.map((interval) => (
             <th key={interval}>{interval}</th>
           ))}
         </tr>

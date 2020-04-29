@@ -20,7 +20,7 @@ export function Mortgage(props: Props) {
             title="House Price"
             prepend="€"
             value={props.price}
-            onChange={value => props.onChange('price', parseInt(value, 10))}
+            onChange={(value) => props.onChange('price', parseInt(value, 10))}
           />
         </Col>
         <Col>
@@ -45,7 +45,7 @@ export function Mortgage(props: Props) {
             title="Percentage"
             disabled
             prepend="%"
-            value={props.percentage*100}
+            value={props.percentage * 100}
             onChange={() => {}}
           />
         </Col>
@@ -57,7 +57,7 @@ export function Mortgage(props: Props) {
             title="Own savings"
             prepend="€"
             value={props.savings}
-            onChange={value => props.onChange('savings', parseInt(value, 10))}
+            onChange={(value) => props.onChange('savings', parseInt(value, 10))}
           />
         </Col>
         <Col>
@@ -74,7 +74,7 @@ export function Mortgage(props: Props) {
             title="Interest"
             prepend="%"
             value={props.interest}
-            onChange={value => props.onChange('interest', parseFloat(value))}
+            onChange={(value) => props.onChange('interest', parseFloat(value))}
           />
         </Col>
         <Col />

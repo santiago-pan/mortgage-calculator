@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputGroup, FormControl } from 'react-bootstrap';
+import { FormControl, InputGroup } from 'react-bootstrap';
 import NumberFormat from 'react-number-format';
 
 type InputFieldProps = {
