@@ -42,7 +42,7 @@ export function Mortgage(props: Props) {
         </Col>
         <Col>
           <InputField
-            title="Percentage"
+            title="Loan/Price"
             disabled
             prepend="%"
             value={props.percentage * 100}

@@ -32,7 +32,7 @@ export function DataTable(props: TableProps) {
           <th>Gross Paid</th>
           <th>Capital Paid</th>
           <th>Interest Paid</th>
-          <th>Remaining</th>
+          {/* <th>Remaining</th> */}
           <th>Tax Return</th>
           <th>Net Paid</th>
         </tr>
@@ -46,7 +46,7 @@ export function DataTable(props: TableProps) {
               <TableNumber value={item.grossPaid} />
               <TableNumber value={item.capitalPaid} />
               <TableNumber value={item.interest} />
-              <TableNumber value={item.remaining} />
+              {/* <TableNumber value={item.remaining} /> */}
               <TableNumber value={item.taxReturn} />
               <TableNumber value={item.netPaid} />
             </tr>

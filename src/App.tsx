@@ -5,13 +5,13 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
+import { Data } from './common/Types';
 import { DataTable } from './components/DataTable';
 import { Graph } from './components/Graph';
 import { Interest } from './components/Interest';
 import { Mortgage } from './components/Mortgage';
 import { MAX_NHG, MortgageCosts, NHG_FEE } from './components/MortgageCosts';
 import { IPMT, PMT, PPMT } from './Formulas';
-import { Data } from './common/Types';
 
 type State = {
   // mortgage
@@ -175,12 +175,12 @@ const App = () => {
         <Row>
           <Col>
             <label className="mb-1">Mortage Structure</label>
-            <Tabs defaultActiveKey="linear" id="graph-tab">
-              <Tab eventKey="linear" title="Linear">
-                <DataTable data={data} />
-              </Tab>
+            <Tabs defaultActiveKey="annuity" id="graph-tab">
               <Tab eventKey="annuity" title="Annuity">
                 <DataTable data={annuity} />
+              </Tab>
+              <Tab eventKey="linear" title="Linear">
+                <DataTable data={data} />
               </Tab>
               <Tab eventKey="graph" title="Graph">
                 <Graph data={data} />
