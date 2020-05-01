@@ -5,7 +5,6 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
-import './App.css';
 import { DataTable } from './components/DataTable';
 import { Graph } from './components/Graph';
 import { Interest } from './components/Interest';
