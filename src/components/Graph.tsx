@@ -7,7 +7,7 @@ import {
   CartesianGrid,
   Line,
 } from 'recharts';
-import { Data } from '../Types';
+import { Data } from '../common/Types';
 
 type GraphProps = {
   data: Array<Data>;

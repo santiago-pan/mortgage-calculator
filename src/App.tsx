@@ -11,7 +11,7 @@ import { Interest } from './components/Interest';
 import { Mortgage } from './components/Mortgage';
 import { MAX_NHG, MortgageCosts, NHG_FEE } from './components/MortgageCosts';
 import { IPMT, PMT, PPMT } from './Formulas';
-import { Data } from './Types';
+import { Data } from './common/Types';
 
 type State = {
   // mortgage

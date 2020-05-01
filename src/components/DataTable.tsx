@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import NumberFormat from 'react-number-format';
-import { Data } from '../Types';
+import { Data } from '../common/Types';
 
 type TableProps = {
   data: Array<Data>;
