@@ -70,7 +70,7 @@ const App = () => {
         <Hero color="primary">
           <Hero.Body>
             <Heading>Mortgage Calculator</Heading>
-            <Heading subtitle>Annuity and Linear mortgage calculator</Heading>
+            <Heading subtitle>Annuity and Linear mortgage calculator for The Netherlands</Heading>
           </Hero.Body>
         </Hero>
       </Section>
