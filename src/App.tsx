@@ -1,19 +1,26 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Row from 'react-bootstrap/Row';
-import { Data } from './common/Types';
+import {
+  Container,
+  Heading,
+  Hero,
+  Section,
+  Tabs,
+} from 'react-bulma-components';
+import 'react-bulma-components/dist/react-bulma-components.min.css';
+import {
+  calculateAnnuityData,
+  calculateLinearData,
+  calgulateLoanFigures,
+} from './common/Formulas';
+import { MortgageData } from './common/Types';
 import { DataTable } from './components/DataTable';
 import { Graph } from './components/Graph';
 import { Interest } from './components/Interest';
 import { Mortgage } from './components/Mortgage';
-import { MAX_NHG, MortgageCosts, NHG_FEE } from './components/MortgageCosts';
-import { IPMT, PMT, PPMT } from './Formulas';
+import { MortgageCosts } from './components/MortgageCosts';
+import './App.sass'
 
-type State = {
+export type AppState = {
   // mortgage
   price: number;
   interest: number;
@@ -28,68 +35,11 @@ type State = {
   structuralSurvey: number;
 };
 
-function calculateAnnuityData(data: State, loan: number) {
-  const rate = data.interest / (12 * 100);
-  const numberOfPeriods = 360;
-  const pmt = PMT(rate, numberOfPeriods, loan);
-
-  let totalPaid = 0;
-
-  return Array(360)
-    .fill(0)
-    .map((v, i) => {
-      const period = i + 1;
-      const ppmt = -PPMT(rate, period, numberOfPeriods, loan);
-      const ipmt = -IPMT(loan, pmt, rate, period);
-
-      let capitalPaid = ppmt;
-      const interest = ipmt;
-      const grossPaid = capitalPaid + interest;
-      const balance = loan - totalPaid;
-      totalPaid += capitalPaid;
-      const taxReturn = (interest * data.taxReturn) / 100;
-      const netPaid = grossPaid - taxReturn;
-      const remaining = Math.round((balance - capitalPaid) * 100) / 100;
-
-      return {
-        month: i + 1,
-        balance,
-        grossPaid,
-        capitalPaid,
-        interest,
-        remaining,
-        taxReturn,
-        netPaid,
-      };
-    });
-}
-
-function calculateData(data: State, loan: number): Array<Data> {
-  const capitalPaid = loan / 360;
-  return Array(360)
-    .fill(0)
-    .map((v, i) => {
-      const balance = loan - capitalPaid * i;
-      const interest = balance * (data.interest / (12 * 100));
-      const grossPaid = capitalPaid + interest;
-      const remaining = balance - capitalPaid;
-      const taxReturn = (interest * data.taxReturn) / 100;
-      const netPaid = grossPaid - taxReturn;
-      return {
-        month: i + 1,
-        balance,
-        grossPaid,
-        capitalPaid,
-        interest,
-        remaining,
-        taxReturn,
-        netPaid,
-      };
-    });
-}
+type InfoTabs = 'mortgage' | 'cost' | 'interest';
+type TableTabs = 'annuity' | 'linear' | 'graph';
 
 const App = () => {
-  const [state, setState] = useState<State>({
+  const [state, setState] = useState<AppState>({
     price: 310000,
     interest: 1.34,
     taxReturn: 36.93,
@@ -102,95 +52,116 @@ const App = () => {
     structuralSurvey: 800,
   });
 
-  const { loan, cost, percentage } = calgulateLoanFigures();
+  const [tab, setTab] = useState<TableTabs>('annuity');
+  const [infoTab, setInfoTab] = useState<InfoTabs>('mortgage');
 
-  const data = calculateData({ ...state }, loan);
-  const annuity = calculateAnnuityData({ ...state }, loan);
+  const { loan, cost, percentage } = calgulateLoanFigures(state);
+
+  const linar = calculateLinearData(state.interest, state.taxReturn, loan);
+  const annuity = calculateAnnuityData(state.interest, state.taxReturn, loan);
 
   function handleChange(field: string, value: number) {
     setState({ ...state, [field]: value });
   }
 
-  function calgulateLoanFigures(): {
-    loan: number;
-    cost: number;
-    percentage: number;
-  } {
-    const bankGuarantee = 0.001 * state.price;
-    const transferTax = 0.02 * state.price;
-    const nhgAvailable = state.price > MAX_NHG ? false : true;
-
-    const cost =
-      bankGuarantee +
-      transferTax +
-      state.notary +
-      state.valuation +
-      state.financialAdvisor +
-      state.realStateAgent +
-      state.structuralSurvey;
-
-    const loan =
-      (state.price - state.savings + cost) / (nhgAvailable ? 1 - NHG_FEE : 1);
-
-    const percentage = loan / state.price;
-
-    return { loan, cost, percentage };
-  }
-
   return (
-    <>
-      <Container>
-        <Jumbotron fluid style={{ padding: '1rem 1rem' }}>
-          <Container>
-            <h1 className="header">Mortgage Calculator</h1>
-            <p>Annuity and Linear mortgage calculator</p>
-          </Container>
-        </Jumbotron>
-
-        <Row className="mb-3">
-          <Col>
-            <label className="mb-1">Mortage</label>
-            <Tabs defaultActiveKey="mortgage" id="figures-tab">
-              <Tab eventKey="mortgage" title="Mortgage">
-                <Mortgage
-                  price={state.price}
-                  savings={state.savings}
-                  loan={loan}
-                  cost={cost}
-                  interest={state.interest}
-                  percentage={percentage}
-                  onChange={handleChange}
-                />
-              </Tab>
-              <Tab eventKey="cost" title="Cost">
-                <MortgageCosts {...state} loan={loan} onChange={handleChange} />
-              </Tab>
-              <Tab eventKey="overview" title="Interest">
-                <Interest />
-              </Tab>
-            </Tabs>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col>
-            <label className="mb-1">Mortage Structure</label>
-            <Tabs defaultActiveKey="annuity" id="graph-tab">
-              <Tab eventKey="annuity" title="Annuity">
-                <DataTable data={annuity} />
-              </Tab>
-              <Tab eventKey="linear" title="Linear">
-                <DataTable data={data} />
-              </Tab>
-              <Tab eventKey="graph" title="Graph">
-                <Graph data={data} />
-              </Tab>
-            </Tabs>
-          </Col>
-        </Row>
-      </Container>
-    </>
+    <Container>
+      <Section>
+        <Hero color="primary">
+          <Hero.Body>
+            <Heading>Mortgage Calculator</Heading>
+            <Heading subtitle>Annuity and Linear mortgage calculator</Heading>
+          </Hero.Body>
+        </Hero>
+      </Section>
+      <Section>
+        <Heading subtitle>Mortage</Heading>
+        <Tabs color="primary">
+          <Tabs.Tab
+          color="primary"
+            active={infoTab === 'mortgage'}
+            onClick={() => setInfoTab('mortgage')}
+          >
+            Mortgage
+          </Tabs.Tab>
+          <Tabs.Tab
+            active={infoTab === 'cost'}
+            onClick={() => setInfoTab('cost')}
+          >
+            Cost
+          </Tabs.Tab>
+          <Tabs.Tab
+            active={infoTab === 'interest'}
+            onClick={() => setInfoTab('interest')}
+          >
+            Interest
+          </Tabs.Tab>
+        </Tabs>
+        {renderInfoTabs(infoTab, state, loan, cost, percentage, handleChange)}
+      </Section>
+      <Section>
+        <Heading subtitle>Mortage Structure</Heading>
+        <Tabs>
+          <Tabs.Tab
+            active={tab === 'annuity'}
+            onClick={() => setTab('annuity')}
+          >
+            Annuity
+          </Tabs.Tab>
+          <Tabs.Tab active={tab === 'linear'} onClick={() => setTab('linear')}>
+            Linear
+          </Tabs.Tab>
+          <Tabs.Tab active={tab === 'graph'} onClick={() => setTab('graph')}>
+            Graph
+          </Tabs.Tab>
+        </Tabs>
+        {renderMortgageTabs(tab, annuity, linar)}
+      </Section>
+    </Container>
   );
 };
+
+function renderInfoTabs(
+  tab: InfoTabs,
+  state: AppState,
+  loan: number,
+  cost: number,
+  percentage: number,
+  handleChange: (field: string, value: number) => void,
+) {
+  switch (tab) {
+    case 'mortgage':
+      return (
+        <Mortgage
+          price={state.price}
+          savings={state.savings}
+          loan={loan}
+          cost={cost}
+          interest={state.interest}
+          percentage={percentage}
+          onChange={handleChange}
+        />
+      );
+    case 'cost':
+      return <MortgageCosts {...state} loan={loan} onChange={handleChange} />;
+    case 'interest':
+      return <Interest />;
+  }
+}
+
+function renderMortgageTabs(
+  tab: TableTabs,
+  annuity: MortgageData[],
+  linear: MortgageData[],
+) {
+  switch (tab) {
+    case 'annuity':
+      return <DataTable data={annuity} />;
+    case 'linear':
+      return <DataTable data={linear} />;
+    case 'graph':
+      return <Graph data={linear} />;
+  }
+}
 
 export default App;

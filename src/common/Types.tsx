@@ -1,4 +1,4 @@
-export type Data = {
+export type MortgageData = {
   month: number;
   balance: number;
   grossPaid: number;

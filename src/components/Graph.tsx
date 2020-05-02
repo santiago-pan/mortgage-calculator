@@ -7,10 +7,10 @@ import {
   CartesianGrid,
   Line,
 } from 'recharts';
-import { Data } from '../common/Types';
+import { MortgageData } from '../common/Types';
 
 type GraphProps = {
-  data: Array<Data>;
+  data: Array<MortgageData>;
 };
 
 export function Graph(props: GraphProps) {

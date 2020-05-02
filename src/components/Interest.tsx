@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Table } from 'react-bulma-components';
 import NumberFormat from 'react-number-format';
 
 const intervals = [
@@ -65,29 +65,31 @@ function TableNumber(props: { value: string; suffix: string | '€' }) {
 
 export function Interest() {
   return (
-    <Table striped bordered hover size="sm">
-      <thead>
-        <tr>
-          {intervals.map((interval) => (
-            <th key={interval}>{interval}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {interests.map((interest, i) => {
-          return (
-            <tr key={i}>
-              {Object.values(interest).map((item, j) =>
-                j > 0 ? (
-                  <TableNumber key={j} value={item} suffix={'%'} />
-                ) : (
-                  <TableNumber key={j} value={item} suffix={' years'} />
-                ),
-              )}
-            </tr>
-          );
-        })}
-      </tbody>
-    </Table>
+    <div>
+      <Table striped bordered>
+        <thead>
+          <tr>
+            {intervals.map((interval) => (
+              <th key={interval}>{interval}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {interests.map((interest, i) => {
+            return (
+              <tr key={i}>
+                {Object.values(interest).map((item, j) =>
+                  j > 0 ? (
+                    <TableNumber key={j} value={item} suffix={'%'} />
+                  ) : (
+                    <TableNumber key={j} value={item} suffix={' years'} />
+                  ),
+                )}
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+    </div>
   );
 }

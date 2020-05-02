@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Columns } from 'react-bulma-components';
 import { InputField } from './InputField';
 
 type Props = {
@@ -13,25 +13,25 @@ type Props = {
 };
 export function Mortgage(props: Props) {
   return (
-    <>
-      <Row className="mb-3">
-        <Col>
+    <div>
+      <Columns>
+        <Columns.Column>
           <InputField
             title="House Price"
             prepend="€"
             value={props.price}
             onChange={(value) => props.onChange('price', parseInt(value, 10))}
           />
-        </Col>
-        <Col>
+        </Columns.Column>
+        <Columns.Column>
           <InputField
             title="Cost"
             prepend="€"
             value={props.cost}
             onChange={() => {}}
           />
-        </Col>
-        <Col>
+        </Columns.Column>
+        <Columns.Column>
           <InputField
             title="Loan"
             disabled
@@ -39,8 +39,8 @@ export function Mortgage(props: Props) {
             value={props.loan}
             onChange={() => {}}
           />
-        </Col>
-        <Col>
+        </Columns.Column>
+        <Columns.Column>
           <InputField
             title="Loan/Price"
             disabled
@@ -48,19 +48,19 @@ export function Mortgage(props: Props) {
             value={props.percentage * 100}
             onChange={() => {}}
           />
-        </Col>
-      </Row>
+        </Columns.Column>
+      </Columns>
 
-      <Row className="mb-3">
-        <Col>
+      <Columns>
+        <Columns.Column>
           <InputField
             title="Own savings"
             prepend="€"
             value={props.savings}
             onChange={(value) => props.onChange('savings', parseInt(value, 10))}
           />
-        </Col>
-        <Col>
+        </Columns.Column>
+        <Columns.Column>
           <InputField
             title="Remaining"
             disabled
@@ -68,17 +68,17 @@ export function Mortgage(props: Props) {
             value={props.savings - props.cost}
             onChange={() => {}}
           />
-        </Col>
-        <Col>
+        </Columns.Column>
+        <Columns.Column>
           <InputField
             title="Interest"
             prepend="%"
             value={props.interest}
             onChange={(value) => props.onChange('interest', parseFloat(value))}
           />
-        </Col>
-        <Col />
-      </Row>
-    </>
+        </Columns.Column>
+        <Columns.Column />
+      </Columns>
+    </div>
   );
 }

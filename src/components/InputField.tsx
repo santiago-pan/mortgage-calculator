@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormControl, InputGroup } from 'react-bootstrap';
 import NumberFormat from 'react-number-format';
 
 type InputFieldProps = {
@@ -12,25 +11,31 @@ type InputFieldProps = {
 
 export function InputField(props: InputFieldProps) {
   return (
-    <React.Fragment>
-      <label className="mb-1">{props.title}</label>
-      <InputGroup size="sm">
-        {props.prepend && (
-          <InputGroup.Prepend>
-            <InputGroup.Text>{props.prepend}</InputGroup.Text>
-          </InputGroup.Prepend>
-        )}
-        <NumberFormat
-          decimalScale={2}
-          customInput={FormControl}
-          thousandSeparator={true}
-          value={props.value}
-          disabled={props.disabled}
-          onBlur={(e: any) => {
-            props.onChange(e.currentTarget.value.replace(/,/g, ''));
-          }}
-        />
-      </InputGroup>
-    </React.Fragment>
+    <>
+      <div className="field">
+        <label>{props.title}</label>
+        <div className="control has-icons-left">
+          <NumberFormat
+            decimalScale={2}
+            customInput={(field) => {
+              return (
+                <>
+                  <input className="input is-small" {...field} />
+                  <span className="icon is-small is-left">
+                    <i className="fas">{props.prepend}</i>
+                  </span>
+                </>
+              );
+            }}
+            thousandSeparator={true}
+            value={props.value}
+            disabled={props.disabled}
+            onBlur={(e: any) => {
+              props.onChange(e.currentTarget.value.replace(/,/g, ''));
+            }}
+          />
+        </div>
+      </div>
+    </>
   );
 }
