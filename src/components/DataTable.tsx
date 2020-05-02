@@ -25,7 +25,7 @@ function TableNumber(props: { value: number }) {
 export function DataTable(props: TableProps) {
   return (
     <div>
-      <Table striped>
+      <Table striped className="is-narrow" >
         <thead>
           <tr>
             <th>Month</th>
@@ -33,7 +33,6 @@ export function DataTable(props: TableProps) {
             <th>Gross</th>
             <th>Capital</th>
             <th>Interest</th>
-            {/* <th>Remaining</th> */}
             <th>Tax Return</th>
             <th>Net</th>
           </tr>
@@ -47,7 +46,6 @@ export function DataTable(props: TableProps) {
                 <TableNumber value={item.grossPaid} />
                 <TableNumber value={item.capitalPaid} />
                 <TableNumber value={item.interest} />
-                {/* <TableNumber value={item.remaining} /> */}
                 <TableNumber value={item.taxReturn} />
                 <TableNumber value={item.netPaid} />
               </tr>
