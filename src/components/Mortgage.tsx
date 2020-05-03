@@ -25,7 +25,7 @@ export function Mortgage(props: Props) {
         </Columns.Column>
         <Columns.Column>
           <InputField
-            title="Cost"
+            title="Purchase Costs"
             prepend="€"
             value={props.cost}
             onChange={() => {}}
@@ -33,7 +33,7 @@ export function Mortgage(props: Props) {
         </Columns.Column>
         <Columns.Column>
           <InputField
-            title="Loan"
+            title="Required Loan"
             disabled
             prepend="€"
             value={props.loan}
@@ -42,7 +42,7 @@ export function Mortgage(props: Props) {
         </Columns.Column>
         <Columns.Column>
           <InputField
-            title="Loan over price"
+            title="Loan / Price (%)"
             disabled
             prepend="%"
             value={props.percentage * 100}

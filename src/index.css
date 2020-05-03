@@ -18,7 +18,7 @@ tr {
 .table thead th {
   color: #b5838dff;
   font-weight: normal;
-  font-size: 1em;
+  font-size: 1rem;
 }
 
 .control.has-icons-left .icon {
@@ -26,7 +26,7 @@ tr {
 }
 
 .table tbody tr td {
-  font-size: 0.75em;
+  font-size: 0.75rem;
 }
 
 .input {
@@ -35,9 +35,10 @@ tr {
 
 .control.has-icons-left .input {
   color: #b5838dff;
+  font-size: 0.75rem;
 }
 
 .table tbody tr td span {
-  font-size: .75rem;
+  font-size: 0.75rem;
 
 }
