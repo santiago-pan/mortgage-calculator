@@ -49,7 +49,7 @@ const App = () => {
     notary: 1200,
     valuation: 800,
     financialAdvisor: 2500,
-    realStateAgent: 3327,
+    realStateAgent: 3000,
     structuralSurvey: 800,
   });
 
