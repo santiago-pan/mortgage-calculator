@@ -19,6 +19,7 @@ import { Interest } from './components/Interest';
 import { Mortgage } from './components/Mortgage';
 import { MortgageCosts } from './components/MortgageCosts';
 import './App.sass'
+import './index.css'
 
 export type AppState = {
   // mortgage
@@ -88,14 +89,14 @@ const App = () => {
             active={infoTab === 'cost'}
             onClick={() => setInfoTab('cost')}
           >
-            Cost
+            Purchase Costs
           </Tabs.Tab>
-          <Tabs.Tab
+          {/* <Tabs.Tab
             active={infoTab === 'interest'}
             onClick={() => setInfoTab('interest')}
           >
             Interest
-          </Tabs.Tab>
+          </Tabs.Tab> */}
         </Tabs>
         {renderInfoTabs(infoTab, state, loan, cost, percentage, handleChange)}
       </Section>
@@ -111,9 +112,9 @@ const App = () => {
           <Tabs.Tab active={tab === 'linear'} onClick={() => setTab('linear')}>
             Linear
           </Tabs.Tab>
-          <Tabs.Tab active={tab === 'graph'} onClick={() => setTab('graph')}>
+          {/* <Tabs.Tab active={tab === 'graph'} onClick={() => setTab('graph')}>
             Graph
-          </Tabs.Tab>
+          </Tabs.Tab> */}
         </Tabs>
         {renderMortgageTabs(tab, annuity, linar)}
       </Section>

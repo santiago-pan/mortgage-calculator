@@ -1,0 +1,40 @@
+/* $color1: #ffcdb2ff
+$color2: #ffb4a2ff
+$color3: #e5989bff
+$color4: #b5838dff
+$color5: #6d6875ff */
+
+
+/* $purple: #b5838dff
+$pink: #fa7c91
+$brown: #E9D0DB
+$beige-light: #b5838dff
+$beige-lighter: #e9d0db */
+
+tr {
+  color: #b5838dff;
+}
+
+.table thead th {
+  color: #b5838dff;
+}
+
+.control.has-icons-left .icon {
+  color: #b5838dff;
+}
+
+.table tbody tr td {
+  font-size: 0.75em;
+}
+
+.input {
+  color: #b5838dff
+}
+
+.control.has-icons-left .input {
+  color: #b5838dff;
+}
+
+.table tbody tr td span {
+  font-size: .75rem;
+}

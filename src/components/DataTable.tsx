@@ -11,7 +11,6 @@ function TableNumber(props: { value: number }) {
   return (
     <td style={{ width: '200px' }}>
       <NumberFormat
-        style={{ fontSize: '14px' }}
         value={props.value}
         displayType={'text'}
         thousandSeparator={true}
@@ -24,7 +23,7 @@ function TableNumber(props: { value: number }) {
 
 export function DataTable(props: TableProps) {
   return (
-    <div>
+    <div className="table-container">
       <Table striped className="is-narrow" >
         <thead>
           <tr>
