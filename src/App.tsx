@@ -120,6 +120,8 @@ const App = () => {
         </Tabs>
         {renderMortgageTabs(tab, annuity, linar)}
       </Section>
+      <Section>
+      </Section>
     </Container>
   );
 };
