@@ -1,24 +1,17 @@
 import React, { useState } from 'react';
-import {
-  Container,
-  Heading,
-  Hero,
-  Section,
-  Tabs,
-} from 'react-bulma-components';
-import 'react-bulma-components/dist/react-bulma-components.min.css';
+// import 'react-bulma-components/dist/react-bulma-components.min.css';
+import './App.sass';
 import {
   calculateAnnuityData,
   calculateLinearData,
   calgulateLoanFigures,
 } from './common/Formulas';
 import { MortgageData } from './common/Types';
+import { Costs } from './components/Costs';
 import { DataTable } from './components/DataTable';
 import { Graph } from './components/Graph';
 import { Interest } from './components/Interest';
 import { Mortgage } from './components/Mortgage';
-import { Costs } from './components/Costs';
-import './App.sass';
 import './index.css';
 
 export type AppState = {
@@ -66,61 +59,64 @@ const App = () => {
   }
 
   return (
-    <Container>
-      <Section>
-        <Hero color="primary">
-          <Hero.Body>
-            <Heading>Mortgage Calculator</Heading>
-            <Heading subtitle>
+    <div className="container">
+      <section className="section">
+        <section className="hero is-primary">
+          <div className="hero-body">
+            <h1 className="title">Mortgage Calculator</h1>
+            <h1 className="subtitle">
               Annuity and Linear mortgage calculator for The Netherlands
-            </Heading>
-          </Hero.Body>
-        </Hero>
-      </Section>
-      <Section>
-        <Heading subtitle>Mortage</Heading>
-        <Tabs color="primary">
-          <Tabs.Tab
-            color="primary"
-            active={infoTab === 'mortgage'}
-            onClick={() => setInfoTab('mortgage')}
-          >
-            Mortgage
-          </Tabs.Tab>
-          <Tabs.Tab
-            active={infoTab === 'cost'}
-            onClick={() => setInfoTab('cost')}
-          >
-            Purchase Costs
-          </Tabs.Tab>
-          <Tabs.Tab
-            active={infoTab === 'interest'}
-            onClick={() => setInfoTab('interest')}
-          >
-            Interest
-          </Tabs.Tab>
-        </Tabs>
+            </h1>
+          </div>
+        </section>
+      </section>
+      <section className="section">
+        <h1 className="subtitle">Mortage</h1>
+        <div className="tabs is-primary">
+          <ul>
+            <li className={infoTab === 'mortgage' ? 'is-active' : ''}>
+              <a onClick={() => setInfoTab('mortgage')} role="button">
+                Mortgage
+              </a>
+            </li>
+            <li className={infoTab === 'cost' ? 'is-active' : ''}>
+              <a onClick={() => setInfoTab('cost')} role="button">
+                Purchase Costs
+              </a>
+            </li>
+            <li className={infoTab === 'interest' ? 'is-active' : ''}>
+              <a onClick={() => setInfoTab('interest')} role="button">
+                Interest
+              </a>
+            </li>
+          </ul>
+        </div>
         {renderInfoTabs(infoTab, state, loan, cost, percentage, handleChange)}
-      </Section>
-      <Section>
-        <Heading subtitle>Mortage Structure</Heading>
-        <Tabs>
-          <Tabs.Tab
-            active={tab === 'annuity'}
-            onClick={() => setTab('annuity')}
-          >
-            Annuity
-          </Tabs.Tab>
-          <Tabs.Tab active={tab === 'linear'} onClick={() => setTab('linear')}>
-            Linear
-          </Tabs.Tab>
-          {/* <Tabs.Tab active={tab === 'graph'} onClick={() => setTab('graph')}>
+      </section>
+      <section className="section">
+        <h1 className="subtitle">Mortage Structure</h1>
+        <div className="tabs is-primary">
+          <ul>
+            <li
+              className={tab === 'annuity' ? 'is-active' : ''}
+              onClick={() => setTab('annuity')}
+            >
+              <a>Annuity</a>
+            </li>
+            <li
+              className={tab === 'linear' ? 'is-active' : ''}
+              onClick={() => setTab('linear')}
+            >
+              <a>Linear</a>
+            </li>
+            {/* <Tabs.Tab active={tab === 'graph'} onClick={() => setTab('graph')}>
             Graph
           </Tabs.Tab> */}
-        </Tabs>
+          </ul>
+        </div>
         {renderMortgageTabs(tab, annuity, linar)}
-      </Section>
-      <Section>
+      </section>
+      <section className="section">
         <a
           href="https://github.com/santiago-pan/mortgage-calculator"
           className="github-link"
@@ -134,8 +130,8 @@ const App = () => {
           />
           Github
         </a>
-      </Section>
-    </Container>
+      </section>
+    </div>
   );
 };
 

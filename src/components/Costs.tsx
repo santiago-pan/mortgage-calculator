@@ -1,5 +1,4 @@
 import React from 'react';
-import { Columns } from 'react-bulma-components';
 import { InputField } from './InputField';
 
 export const MAX_NHG = 310000;
@@ -24,8 +23,8 @@ export function Costs(props: Props) {
 
   return (
     <div>
-      <Columns>
-        <Columns.Column>
+      <div className="columns">
+        <div className="column">
           <InputField
             title="Transfer Tax"
             prepend="€"
@@ -33,8 +32,8 @@ export function Costs(props: Props) {
             value={transferTax}
             onChange={() => {}}
           />
-        </Columns.Column>
-        <Columns.Column>
+        </div>
+        <div className="column">
           <InputField
             title="Valuation"
             prepend="€"
@@ -43,8 +42,8 @@ export function Costs(props: Props) {
               props.onChange('valuation', parseInt(value, 10))
             }
           />
-        </Columns.Column>
-        <Columns.Column>
+        </div>
+        <div className="column">
           <InputField
             title="Real State Agent"
             prepend="€"
@@ -53,8 +52,8 @@ export function Costs(props: Props) {
               props.onChange('realStateAgent', parseInt(value, 10))
             }
           />
-        </Columns.Column>
-        <Columns.Column>
+        </div>
+        <div className="column">
           <InputField
             title="Bank Guarantee"
             prepend="€"
@@ -62,19 +61,19 @@ export function Costs(props: Props) {
             value={bankGuarantee}
             onChange={() => {}}
           />
-        </Columns.Column>
-      </Columns>
+        </div>
+      </div>
 
-      <Columns className="mb-3">
-        <Columns.Column>
+      <div className="columns">
+        <div className="column">
           <InputField
             title="Notary"
             prepend="€"
             value={props.notary}
             onChange={(value) => props.onChange('notary', parseInt(value, 10))}
           />
-        </Columns.Column>
-        <Columns.Column>
+        </div>
+        <div className="column">
           <InputField
             title="Financial Advisor"
             prepend="€"
@@ -83,8 +82,8 @@ export function Costs(props: Props) {
               props.onChange('financialAdvisor', parseInt(value, 10))
             }
           />
-        </Columns.Column>
-        <Columns.Column>
+        </div>
+        <div className="column">
           <InputField
             title="NHG"
             prepend="€"
@@ -92,8 +91,8 @@ export function Costs(props: Props) {
             value={nhg}
             onChange={() => {}}
           />
-        </Columns.Column>
-        <Columns.Column>
+        </div>
+        <div className="column">
           <InputField
             title="Structural Survey"
             prepend="€"
@@ -102,8 +101,8 @@ export function Costs(props: Props) {
               props.onChange('structuralSurvey', parseInt(value, 10))
             }
           />
-        </Columns.Column>
-      </Columns>
+        </div>
+      </div>
     </div>
   );
 }

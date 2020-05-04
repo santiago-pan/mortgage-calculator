@@ -17,12 +17,12 @@ tr {
 }
 
 .input {
-  color: #6b717f
+  color: #6b717f;
 }
 
 .control.has-icons-left .input {
   color: #6b717f;
-  font-size: 0.75rem;
+  /* font-size: 0.75rem; */
 }
 
 .table tbody tr td span {

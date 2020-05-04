@@ -1,5 +1,4 @@
 import React from 'react';
-import { Columns } from 'react-bulma-components';
 import { InputField } from './InputField';
 
 type Props = {
@@ -14,24 +13,25 @@ type Props = {
 export function Mortgage(props: Props) {
   return (
     <div>
-      <Columns>
-        <Columns.Column>
+      <div className="columns">
+        <div className="column">
           <InputField
             title="House Price"
             prepend="€"
             value={props.price}
             onChange={(value) => props.onChange('price', parseInt(value, 10))}
           />
-        </Columns.Column>
-        <Columns.Column>
+        </div>
+        <div className="column">
           <InputField
             title="Purchase Costs"
+            disabled
             prepend="€"
             value={props.cost}
             onChange={() => {}}
           />
-        </Columns.Column>
-        <Columns.Column>
+        </div>
+        <div className="column">
           <InputField
             title="Required Loan"
             disabled
@@ -39,8 +39,8 @@ export function Mortgage(props: Props) {
             value={props.loan}
             onChange={() => {}}
           />
-        </Columns.Column>
-        <Columns.Column>
+        </div>
+        <div className="column">
           <InputField
             title="Loan / Price (%)"
             disabled
@@ -48,19 +48,19 @@ export function Mortgage(props: Props) {
             value={props.percentage * 100}
             onChange={() => {}}
           />
-        </Columns.Column>
-      </Columns>
+        </div>
+      </div>
 
-      <Columns>
-        <Columns.Column>
+      <div className="columns">
+        <div className="column">
           <InputField
             title="Own savings"
             prepend="€"
             value={props.savings}
             onChange={(value) => props.onChange('savings', parseInt(value, 10))}
           />
-        </Columns.Column>
-        <Columns.Column>
+        </div>
+        <div className="column">
           <InputField
             title="Remaining"
             disabled
@@ -68,17 +68,17 @@ export function Mortgage(props: Props) {
             value={props.savings - props.cost}
             onChange={() => {}}
           />
-        </Columns.Column>
-        <Columns.Column>
+        </div>
+        <div className="column">
           <InputField
             title="Interest"
             prepend="%"
             value={props.interest}
             onChange={(value) => props.onChange('interest', parseFloat(value))}
           />
-        </Columns.Column>
-        <Columns.Column />
-      </Columns>
+        </div>
+        <div className="column" />
+      </div>
     </div>
   );
 }
