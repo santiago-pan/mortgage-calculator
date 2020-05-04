@@ -1,5 +1,5 @@
 import { MortgageData } from './Types';
-import { MAX_NHG, NHG_FEE } from '../components/MortgageCosts';
+import { MAX_NHG, NHG_FEE } from '../components/Costs';
 import { AppState } from '../App';
 
 export function PMT(rate: number, nperiod: number, pv: number) {

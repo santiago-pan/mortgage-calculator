@@ -17,9 +17,9 @@ import { DataTable } from './components/DataTable';
 import { Graph } from './components/Graph';
 import { Interest } from './components/Interest';
 import { Mortgage } from './components/Mortgage';
-import { MortgageCosts } from './components/MortgageCosts';
-import './App.sass'
-import './index.css'
+import { Costs } from './components/Costs';
+import './App.sass';
+import './index.css';
 
 export type AppState = {
   // mortgage
@@ -71,7 +71,9 @@ const App = () => {
         <Hero color="primary">
           <Hero.Body>
             <Heading>Mortgage Calculator</Heading>
-            <Heading subtitle>Annuity and Linear mortgage calculator for The Netherlands</Heading>
+            <Heading subtitle>
+              Annuity and Linear mortgage calculator for The Netherlands
+            </Heading>
           </Hero.Body>
         </Hero>
       </Section>
@@ -79,7 +81,7 @@ const App = () => {
         <Heading subtitle>Mortage</Heading>
         <Tabs color="primary">
           <Tabs.Tab
-          color="primary"
+            color="primary"
             active={infoTab === 'mortgage'}
             onClick={() => setInfoTab('mortgage')}
           >
@@ -91,12 +93,12 @@ const App = () => {
           >
             Purchase Costs
           </Tabs.Tab>
-          {/* <Tabs.Tab
+          <Tabs.Tab
             active={infoTab === 'interest'}
             onClick={() => setInfoTab('interest')}
           >
             Interest
-          </Tabs.Tab> */}
+          </Tabs.Tab>
         </Tabs>
         {renderInfoTabs(infoTab, state, loan, cost, percentage, handleChange)}
       </Section>
@@ -144,7 +146,7 @@ function renderInfoTabs(
         />
       );
     case 'cost':
-      return <MortgageCosts {...state} loan={loan} onChange={handleChange} />;
+      return <Costs {...state} loan={loan} onChange={handleChange} />;
     case 'interest':
       return <Interest />;
   }

@@ -17,7 +17,7 @@ type Props = {
   onChange: (field: string, value: number) => void;
 };
 
-export function MortgageCosts(props: Props) {
+export function Costs(props: Props) {
   const bankGuarantee = 0.001 * props.price;
   const transferTax = 0.02 * props.price;
   const nhg = props.price > MAX_NHG ? 0 : NHG_FEE * props.loan;

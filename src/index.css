@@ -1,28 +1,28 @@
 /* $color1: #ffcdb2ff
 $color2: #ffb4a2ff
 $color3: #e5989bff
-$color4: #b5838dff
+$color4: #6b717f
 $color5: #6d6875ff */
 
 
-/* $purple: #b5838dff
+/* $purple: #6b717f
 $pink: #fa7c91
 $brown: #E9D0DB
 $beige-light: #b5838dff
 $beige-lighter: #e9d0db */
 
 tr {
-  color: #b5838dff;
+  color: #6b717f;
 }
 
 .table thead th {
-  color: #b5838dff;
+  color: #6b717f;
   font-weight: normal;
   font-size: 1rem;
 }
 
 .control.has-icons-left .icon {
-  color: #b5838dff;
+  color: #6b717f;
 }
 
 .table tbody tr td {
@@ -30,15 +30,14 @@ tr {
 }
 
 .input {
-  color: #b5838dff
+  color: #6b717f
 }
 
 .control.has-icons-left .input {
-  color: #b5838dff;
+  color: #6b717f;
   font-size: 0.75rem;
 }
 
 .table tbody tr td span {
   font-size: 0.75rem;
-
 }

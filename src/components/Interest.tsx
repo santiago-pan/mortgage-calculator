@@ -52,7 +52,6 @@ function TableNumber(props: { value: string; suffix: string | '€' }) {
   return (
     <td>
       <NumberFormat
-        style={{ fontSize: '14px' }}
         value={props.value}
         displayType={'text'}
         thousandSeparator={true}
@@ -65,31 +64,63 @@ function TableNumber(props: { value: string; suffix: string | '€' }) {
 
 export function Interest() {
   return (
-    <div>
-      <Table striped bordered>
-        <thead>
-          <tr>
-            {intervals.map((interval) => (
-              <th key={interval}>{interval}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {interests.map((interest, i) => {
-            return (
-              <tr key={i}>
-                {Object.values(interest).map((item, j) =>
-                  j > 0 ? (
-                    <TableNumber key={j} value={item} suffix={'%'} />
+    <>
+      <div className="container">
+        <h1 className="subtitle">Reference Interests</h1>
+        <div className="table-container">
+          <table className="table is-striped is-bordered is-narrow">
+            <thead>
+              <tr>
+                {intervals.map((interval) => {
+                  return interval === 'NHG' ? (
+                    <th>
+                      <a href="https://www.nhg.nl/">NHG</a>
+                    </th>
                   ) : (
-                    <TableNumber key={j} value={item} suffix={' years'} />
-                  ),
-                )}
+                    <th key={interval}>{interval}</th>
+                  );
+                })}
               </tr>
-            );
-          })}
-        </tbody>
-      </Table>
-    </div>
+            </thead>
+            <tbody>
+              {interests.map((interest, i) => {
+                return (
+                  <tr key={i}>
+                    {Object.values(interest).map((item, j) =>
+                      j > 0 ? (
+                        <TableNumber key={j} value={item} suffix={'%'} />
+                      ) : (
+                        <TableNumber key={j} value={item} suffix={' years'} />
+                      ),
+                    )}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br />
+      <div className="container">
+        <h1 className="subtitle">Interest Rates Sources</h1>
+        <a href="https://www.ikbenfrits.nl/" target="_blank">
+          Compare mortgage rates
+        </a>
+        <br/>
+        <a
+          href="https://www.ing.nl/particulier/hypotheken/actuele-hypotheekrente/index.html"
+          target="_blank"
+        >
+          ING
+        </a>
+        <br/>
+        <a
+          href="https://www.rabobank.nl/particulieren/hypotheek/hypotheekrente/rente-annuiteitenhypotheek-en-lineaire-hypotheek/"
+          target="_blank"
+        >
+          Rabobank
+        </a>
+      </div>
+    </>
   );
 }
