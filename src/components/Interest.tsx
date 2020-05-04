@@ -1,5 +1,4 @@
 import React from 'react';
-import { Table } from 'react-bulma-components';
 import NumberFormat from 'react-number-format';
 
 const intervals = [
@@ -73,8 +72,14 @@ export function Interest() {
               <tr>
                 {intervals.map((interval) => {
                   return interval === 'NHG' ? (
-                    <th>
-                      <a href="https://www.nhg.nl/">NHG</a>
+                    <th key={interval}>
+                      <a
+                        href="https://www.nhg.nl/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        NHG
+                      </a>
                     </th>
                   ) : (
                     <th key={interval}>{interval}</th>
@@ -103,22 +108,36 @@ export function Interest() {
       <br />
       <div className="container">
         <h1 className="subtitle">Interest Rates Sources</h1>
-        <a href="https://www.ikbenfrits.nl/" target="_blank">
+        <a
+          href="https://www.ikbenfrits.nl/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Compare mortgage rates
         </a>
-        <br/>
+        <br />
         <a
           href="https://www.ing.nl/particulier/hypotheken/actuele-hypotheekrente/index.html"
           target="_blank"
+          rel="noopener noreferrer"
         >
           ING
         </a>
-        <br/>
+        <br />
         <a
           href="https://www.rabobank.nl/particulieren/hypotheek/hypotheekrente/rente-annuiteitenhypotheek-en-lineaire-hypotheek/"
           target="_blank"
+          rel="noopener noreferrer"
         >
           Rabobank
+        </a>
+        <br />
+        <a
+          href="https://www.abnamro.nl/nl/prive/hypotheken/actuele-hypotheekrente/index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ABN-AMRO
         </a>
       </div>
     </>
