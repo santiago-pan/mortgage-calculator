@@ -20,7 +20,7 @@ export function InputField(props: InputFieldProps) {
             customInput={(field) => {
               return (
                 <>
-                  <input className="input is-small" {...field} />
+                  <input className="input" {...field} />
                   <span className="icon is-small is-left">
                     <i className="fas">{props.prepend}</i>
                   </span>
