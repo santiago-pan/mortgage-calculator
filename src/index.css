@@ -1,15 +1,15 @@
 tr {
-  color: #6b717f;
+  color: #4b4f58;
 }
 
 .table thead th {
-  color: #6b717f;
+  color: #4b4f58;
   font-weight: normal;
   font-size: 1rem;
 }
 
 .control.has-icons-left .icon {
-  color: #6b717f;
+  color: #4b4f58;
 }
 
 .table tbody tr td {
@@ -17,11 +17,11 @@ tr {
 }
 
 .input {
-  color: #6b717f;
+  color: #4b4f58;
 }
 
 .control.has-icons-left .input {
-  color: #6b717f;
+  color: #4b4f58;
   /* font-size: 0.75rem; */
 }
 
