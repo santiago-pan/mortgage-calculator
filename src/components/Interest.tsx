@@ -108,37 +108,54 @@ export function Interest() {
       <br />
       <div className="container">
         <h1 className="subtitle">Interest Rates Sources</h1>
-        <a
-          href="https://www.ikbenfrits.nl/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Compare mortgage rates
-        </a>
-        <br />
-        <a
-          href="https://www.ing.nl/particulier/hypotheken/actuele-hypotheekrente/index.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          ING
-        </a>
-        <br />
-        <a
-          href="https://www.rabobank.nl/particulieren/hypotheek/hypotheekrente/rente-annuiteitenhypotheek-en-lineaire-hypotheek/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Rabobank
-        </a>
-        <br />
-        <a
-          href="https://www.abnamro.nl/nl/prive/hypotheken/actuele-hypotheekrente/index.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          ABN-AMRO
-        </a>
+        <table className="table is-bordered">
+          <tbody>
+            <tr>
+              <td>
+                <a
+                  href="https://www.ikbenfrits.nl/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Compare mortgage rates
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://www.ing.nl/particulier/hypotheken/actuele-hypotheekrente/index.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  ING
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://www.rabobank.nl/particulieren/hypotheek/hypotheekrente/rente-annuiteitenhypotheek-en-lineaire-hypotheek/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Rabobank
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://www.abnamro.nl/nl/prive/hypotheken/actuele-hypotheekrente/index.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  ABN-AMRO
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </>
   );
