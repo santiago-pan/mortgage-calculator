@@ -108,9 +108,12 @@ const App = () => {
             >
               <a>Linear</a>
             </li>
-            {/* <Tabs.Tab active={tab === 'graph'} onClick={() => setTab('graph')}>
-            Graph
-          </Tabs.Tab> */}
+            <li
+              className={tab === 'graph' ? 'is-active' : ''}
+              onClick={() => setTab('graph')}
+            >
+              <a>Graph</a>
+            </li>
           </ul>
         </div>
         {renderMortgageTabs(tab, annuity, linar)}
@@ -173,7 +176,7 @@ function renderMortgageTabs(
     case 'linear':
       return <DataTable data={linear} />;
     case 'graph':
-      return <Graph data={linear} />;
+      return <Graph annuity={annuity} linear={linear} />;
   }
 }
 

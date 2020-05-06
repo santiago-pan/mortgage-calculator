@@ -26,7 +26,7 @@ export function DataTable(props: TableProps) {
       <table className="table is-striped is-narrow" >
         <thead>
           <tr>
-            <th>Month</th>
+            <th>#</th>
             <th>Balance</th>
             <th>Gross</th>
             <th>Capital</th>
