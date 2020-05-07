@@ -17,7 +17,7 @@ export type AppState = {
   // mortgage
   price: number;
   interest: number;
-  taxReturn: number;
+  deduction: number;
   savings: number;
 
   // costs
@@ -35,7 +35,7 @@ const App = () => {
   const [state, setState] = useState<AppState>({
     price: 310000,
     interest: 1.34,
-    taxReturn: 36.93,
+    deduction: 36.93,
     savings: 40000,
 
     notary: 1200,
@@ -50,8 +50,8 @@ const App = () => {
 
   const { loan, cost, percentage } = calgulateLoanFigures(state);
 
-  const linar = calculateLinearData(state.interest, state.taxReturn, loan);
-  const annuity = calculateAnnuityData(state.interest, state.taxReturn, loan);
+  const linar = calculateLinearData(state.interest, state.deduction, loan);
+  const annuity = calculateAnnuityData(state.interest, state.deduction, loan);
 
   function handleChange(field: string, value: number) {
     setState({ ...state, [field]: value });
@@ -155,7 +155,7 @@ function renderInfoTabs(
           cost={cost}
           interest={state.interest}
           percentage={percentage}
-          taxReturn={state.taxReturn}
+          deduction={state.deduction}
           onChange={handleChange}
         />
       );

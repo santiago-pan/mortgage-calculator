@@ -5,6 +5,6 @@ export type MortgageData = {
   capitalPaid: number;
   interest: number;
   remaining: number;
-  taxReturn: number;
+  deduction: number;
   netPaid: number;
 };

@@ -45,8 +45,8 @@ export function calculateAnnuityData(
       const grossPaid = capitalPaid + interest;
       const balance = loan - totalPaid;
       totalPaid += capitalPaid;
-      const taxReturn = (interest * tax) / 100;
-      const netPaid = grossPaid - taxReturn;
+      const deduction = (interest * tax) / 100;
+      const netPaid = grossPaid - deduction;
       const remaining = Math.round((balance - capitalPaid) * 100) / 100;
 
       return {
@@ -56,7 +56,7 @@ export function calculateAnnuityData(
         capitalPaid,
         interest,
         remaining,
-        taxReturn,
+        deduction,
         netPaid,
       };
     });
@@ -75,8 +75,8 @@ export function calculateLinearData(
       const interest = balance * (int / (12 * 100));
       const grossPaid = capitalPaid + interest;
       const remaining = balance - capitalPaid;
-      const taxReturn = (interest * tax) / 100;
-      const netPaid = grossPaid - taxReturn;
+      const deduction = (interest * tax) / 100;
+      const netPaid = grossPaid - deduction;
       return {
         month: i + 1,
         balance,
@@ -84,7 +84,7 @@ export function calculateLinearData(
         capitalPaid,
         interest,
         remaining,
-        taxReturn,
+        deduction,
         netPaid,
       };
     });

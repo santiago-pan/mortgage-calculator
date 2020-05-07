@@ -44,7 +44,7 @@ export function DataTable(props: TableProps) {
                 <TableNumber value={item.grossPaid} />
                 <TableNumber value={item.capitalPaid} />
                 <TableNumber value={item.interest} />
-                <TableNumber value={item.taxReturn} />
+                <TableNumber value={item.deduction} />
                 <TableNumber value={item.netPaid} />
               </tr>
             );
