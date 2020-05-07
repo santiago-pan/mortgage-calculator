@@ -155,6 +155,7 @@ function renderInfoTabs(
           cost={cost}
           interest={state.interest}
           percentage={percentage}
+          taxReturn={state.taxReturn}
           onChange={handleChange}
         />
       );

@@ -8,6 +8,7 @@ type Props = {
   loan: number;
   interest: number;
   percentage: number;
+  taxReturn: number;
   onChange: (field: string, value: number) => void;
 };
 export function Mortgage(props: Props) {
@@ -77,7 +78,14 @@ export function Mortgage(props: Props) {
             onChange={(value) => props.onChange('interest', parseFloat(value))}
           />
         </div>
-        <div className="column" />
+        <div className="column">
+          <InputField
+            title="Interest Deduction"
+            prepend="%"
+            value={props.taxReturn}
+            onChange={(value) => props.onChange('taxReturn', parseFloat(value))}
+          />
+        </div>
       </div>
     </div>
   );
