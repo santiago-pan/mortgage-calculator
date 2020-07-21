@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import queryString from 'query-string';
+import React, { useEffect, useState } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import './App.sass';
 import {
   calculateAnnuityData,
   calculateLinearData,
   calgulateLoanFigures,
 } from './common/Formulas';
-import { MortgageData } from './common/Types';
+import { MonthMortgageData } from './common/Types';
 import { Costs } from './components/Costs';
 import { DataTable } from './components/DataTable';
 import { Graph } from './components/Graph';
@@ -31,12 +33,18 @@ export type AppState = {
 type InfoTabs = 'mortgage' | 'cost' | 'interest';
 type TableTabs = 'annuity' | 'linear' | 'graph';
 
-const App = () => {
+const App = (props: RouteComponentProps) => {
+  console.log('search: ', props.location.search);
+
+  const search = queryString.parse(props.location.search, {
+    parseNumbers: true,
+  });
+
   const [state, setState] = useState<AppState>({
-    price: 310000,
-    interest: 1.34,
-    deduction: 36.93,
-    savings: 40000,
+    price: (search.price as number) || 310000,
+    interest: (search.interest as number) || 1.34,
+    deduction: (search.deduction as number) || 36.93,
+    savings: (search.savings as number) || 40000,
 
     notary: 1200,
     valuation: 800,
@@ -50,12 +58,25 @@ const App = () => {
 
   const { loan, cost, percentage } = calgulateLoanFigures(state);
 
-  const linar = calculateLinearData(state.interest, state.deduction, loan);
+  const linear = calculateLinearData(state.interest, state.deduction, loan);
   const annuity = calculateAnnuityData(state.interest, state.deduction, loan);
 
   function handleChange(field: string, value: number) {
     setState({ ...state, [field]: value });
   }
+
+  useEffect(() => {
+    const stateQueryString = queryString.stringify({
+      price: state.price,
+      interest: state.interest,
+      deduction: state.deduction,
+      savings: state.savings,
+    });
+
+    if (props.location.search !== '?' + stateQueryString) {
+      props.history.push({ search: '?' + stateQueryString });
+    }
+  }, [state, props.history, props.location.search]);
 
   return (
     <div className="container">
@@ -90,7 +111,18 @@ const App = () => {
             </li>
           </ul>
         </div>
-        {renderInfoTabs(infoTab, state, loan, cost, percentage, handleChange)}
+        {renderInfoTabs(
+          infoTab,
+          state,
+          loan,
+          cost,
+          percentage,
+          annuity.totals.totalPaidGross,
+          linear.totals.totalPaidGross,
+          annuity.totals.totalPaidNet,
+          linear.totals.totalPaidNet,
+          handleChange,
+        )}
       </section>
       <section className="section">
         <h1 className="subtitle">Mortage Structure</h1>
@@ -116,7 +148,7 @@ const App = () => {
             </li>
           </ul>
         </div>
-        {renderMortgageTabs(tab, annuity, linar)}
+        {renderMortgageTabs(tab, annuity.monthly, linear.monthly)}
       </section>
       <section className="section">
         <a
@@ -143,6 +175,10 @@ function renderInfoTabs(
   loan: number,
   cost: number,
   percentage: number,
+  totalPaidGrossAnnuity: number,
+  totalPaidGrossLinear: number,
+  totalPaidNetAnnuity: number,
+  totalPaidNetLinear: number,
   handleChange: (field: string, value: number) => void,
 ) {
   switch (tab) {
@@ -156,6 +192,10 @@ function renderInfoTabs(
           interest={state.interest}
           percentage={percentage}
           deduction={state.deduction}
+          totalPaidGrossAnnuity={totalPaidGrossAnnuity}
+          totalPaidGrossLinear={totalPaidGrossLinear}
+          totalPaidNetAnnuity={totalPaidNetAnnuity}
+          totalPaidNetLinear={totalPaidNetLinear}
           onChange={handleChange}
         />
       );
@@ -168,8 +208,8 @@ function renderInfoTabs(
 
 function renderMortgageTabs(
   tab: TableTabs,
-  annuity: MortgageData[],
-  linear: MortgageData[],
+  annuity: Array<MonthMortgageData>,
+  linear: Array<MonthMortgageData>,
 ) {
   switch (tab) {
     case 'annuity':
@@ -181,4 +221,4 @@ function renderMortgageTabs(
   }
 }
 
-export default App;
+export default withRouter(App);

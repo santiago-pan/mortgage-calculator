@@ -8,11 +8,11 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { MortgageData } from '../common/Types';
+import { MonthMortgageData } from '../common/Types';
 
 type GraphProps = {
-  annuity: Array<MortgageData>;
-  linear: Array<MortgageData>;
+  annuity: Array<MonthMortgageData>;
+  linear: Array<MonthMortgageData>;
 };
 
 export function Graph(props: GraphProps) {

@@ -26,14 +26,15 @@ export function calculateAnnuityData(
   int: number,
   tax: number,
   loan: number,
-): Array<MortgageData> {
+): MortgageData {
   const rate = int / (12 * 100);
   const numberOfPeriods = 360;
   const pmt = PMT(rate, numberOfPeriods, loan);
 
-  let totalPaid = 0;
+  let totalPaidGross = 0;
+  let totalPaidNet = 0
 
-  return Array(360)
+  const monthly = Array(360)
     .fill(0)
     .map((v, i) => {
       const period = i + 1;
@@ -43,10 +44,11 @@ export function calculateAnnuityData(
       let capitalPaid = ppmt;
       const interest = ipmt;
       const grossPaid = capitalPaid + interest;
-      const balance = loan - totalPaid;
-      totalPaid += capitalPaid;
+      const balance = loan - totalPaidGross;
+      totalPaidGross += grossPaid;
       const deduction = (interest * tax) / 100;
       const netPaid = grossPaid - deduction;
+      totalPaidNet += netPaid;
       const remaining = Math.round((balance - capitalPaid) * 100) / 100;
 
       return {
@@ -60,15 +62,25 @@ export function calculateAnnuityData(
         netPaid,
       };
     });
+
+  return {
+    monthly,
+    totals: {
+      totalPaidGross,
+      totalPaidNet
+    },
+  };
 }
 
 export function calculateLinearData(
   int: number,
   tax: number,
   loan: number,
-): Array<MortgageData> {
+): MortgageData {
   const capitalPaid = loan / 360;
-  return Array(360)
+  let totalPaidGross = 0;
+  let totalPaidNet = 0;
+  const monthly = Array(360)
     .fill(0)
     .map((v, i) => {
       const balance = loan - capitalPaid * i;
@@ -77,6 +89,8 @@ export function calculateLinearData(
       const remaining = balance - capitalPaid;
       const deduction = (interest * tax) / 100;
       const netPaid = grossPaid - deduction;
+      totalPaidNet += netPaid;
+      totalPaidGross += grossPaid;
       return {
         month: i + 1,
         balance,
@@ -88,6 +102,14 @@ export function calculateLinearData(
         netPaid,
       };
     });
+
+  return {
+    monthly,
+    totals: {
+      totalPaidGross,
+      totalPaidNet
+    },
+  };
 }
 
 export function calgulateLoanFigures({

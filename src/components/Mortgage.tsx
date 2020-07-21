@@ -9,83 +9,125 @@ type Props = {
   interest: number;
   percentage: number;
   deduction: number;
+  totalPaidGrossAnnuity: number;
+  totalPaidGrossLinear: number;
+  totalPaidNetAnnuity: number;
+  totalPaidNetLinear: number;
   onChange: (field: string, value: number) => void;
 };
+
 export function Mortgage(props: Props) {
+  function ColumnInputField(input: {
+    title: string;
+    prepend: string;
+    value: number;
+    field: string | null;
+    disabled?: boolean;
+  }) {
+    return (
+      <div className="column">
+        <InputField
+          disabled={input.disabled}
+          title={input.title}
+          prepend={input.prepend}
+          value={input.value}
+          onChange={(value) =>
+            input.field && props.onChange(input.field, parseFloat(value))
+          }
+        />
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="columns">
-        <div className="column">
-          <InputField
-            title="House Price"
-            prepend="€"
-            value={props.price}
-            onChange={(value) => props.onChange('price', parseInt(value, 10))}
-          />
-        </div>
-        <div className="column">
-          <InputField
-            title="Purchase Costs"
-            disabled
-            prepend="€"
-            value={props.cost}
-            onChange={() => {}}
-          />
-        </div>
-        <div className="column">
-          <InputField
-            title="Required Loan"
-            disabled
-            prepend="€"
-            value={props.loan}
-            onChange={() => {}}
-          />
-        </div>
-        <div className="column">
-          <InputField
-            title="Loan / Price (%)"
-            disabled
-            prepend="%"
-            value={props.percentage * 100}
-            onChange={() => {}}
-          />
-        </div>
+        <ColumnInputField
+          title="House Price"
+          prepend="€"
+          value={props.price}
+          field={'price'}
+        />
+        <ColumnInputField
+          title="Required Loan"
+          prepend="€"
+          value={props.loan}
+          field={null}
+          disabled
+        />
+        <ColumnInputField
+          title="Total Gross Paid Annuity"
+          prepend="€"
+          value={props.totalPaidGrossAnnuity}
+          field={null}
+          disabled
+        />
       </div>
-
       <div className="columns">
-        <div className="column">
-          <InputField
-            title="Own savings"
-            prepend="€"
-            value={props.savings}
-            onChange={(value) => props.onChange('savings', parseInt(value, 10))}
-          />
-        </div>
-        <div className="column">
-          <InputField
-            title="Remaining"
-            disabled
-            prepend="€"
-            value={props.savings - props.cost}
-            onChange={() => {}}
-          />
-        </div>
-        <div className="column">
-          <InputField
-            title="Interest"
-            prepend="%"
-            value={props.interest}
-            onChange={(value) => props.onChange('interest', parseFloat(value))}
-          />
-        </div>
-        <div className="column">
-          <InputField
-            title="Interest Deduction"
-            prepend="%"
-            value={props.deduction}
-            onChange={(value) => props.onChange('deduction', parseFloat(value))}
-          />
-        </div>
+        <ColumnInputField
+          title="Own Savings"
+          prepend="€"
+          value={props.savings}
+          field={'savings'}
+        />
+        <ColumnInputField
+          title="Loan / Price Rate (%)"
+          prepend="%"
+          value={props.percentage * 100}
+          field={null}
+          disabled
+        />
+        <ColumnInputField
+          title="Total Gross Paid Linear"
+          prepend="€"
+          value={props.totalPaidGrossLinear}
+          field={null}
+          disabled
+        />
+      </div>
+      <div className="columns">
+        <ColumnInputField
+          title="Purchase Cost"
+          prepend="€"
+          value={props.cost}
+          field={null}
+          disabled
+        />
+        <ColumnInputField
+          title="Interest"
+          prepend="%"
+          value={props.interest}
+          field={'interest'}
+        />
+        <ColumnInputField
+          title="Total Net Paid Annuity"
+          prepend="€"
+          value={props.totalPaidNetLinear}
+          field={null}
+          disabled
+        />
+      </div>
+      <div className="columns">
+        <ColumnInputField
+          title="Remaining"
+          prepend="€"
+          value={props.savings - props.cost}
+          field={null}
+          disabled
+        />
+        <ColumnInputField
+          title="Interest Deduction"
+          prepend="%"
+          value={props.deduction}
+          field={'deduction'}
+        />
+        <ColumnInputField
+          title="Total Net Paid Linear"
+          prepend="€"
+          value={props.totalPaidNetLinear}
+          field={null}
+          disabled
+        />
       </div>
     </div>
   );

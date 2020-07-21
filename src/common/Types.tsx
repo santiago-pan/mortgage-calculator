@@ -1,4 +1,4 @@
-export type MortgageData = {
+export type MonthMortgageData = {
   month: number;
   balance: number;
   grossPaid: number;
@@ -7,4 +7,12 @@ export type MortgageData = {
   remaining: number;
   deduction: number;
   netPaid: number;
+}
+
+export type MortgageData = {
+  totals: {
+    totalPaidGross: number;
+    totalPaidNet: number;
+  };
+  monthly: Array<MonthMortgageData>;
 };

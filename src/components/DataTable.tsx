@@ -1,9 +1,9 @@
 import React from 'react';
 import NumberFormat from 'react-number-format';
-import { MortgageData } from '../common/Types';
+import { MonthMortgageData } from '../common/Types';
 
 type TableProps = {
-  data: Array<MortgageData>;
+  data: Array<MonthMortgageData>;
 };
 
 function TableNumber(props: { value: number }) {
