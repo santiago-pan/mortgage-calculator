@@ -76,7 +76,7 @@ export function Interest() {
                       <a
                         href="https://www.nhg.nl/"
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener"
                       >
                         NHG
                       </a>
@@ -115,7 +115,7 @@ export function Interest() {
                 <a
                   href="https://www.ikbenfrits.nl/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener"
                 >
                   Compare mortgage rates
                 </a>
@@ -126,7 +126,7 @@ export function Interest() {
                 <a
                   href="https://www.ing.nl/particulier/hypotheken/actuele-hypotheekrente/index.html"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener"
                 >
                   ING
                 </a>
@@ -137,7 +137,7 @@ export function Interest() {
                 <a
                   href="https://www.rabobank.nl/particulieren/hypotheek/hypotheekrente/rente-annuiteitenhypotheek-en-lineaire-hypotheek/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener"
                 >
                   Rabobank
                 </a>
@@ -148,7 +148,7 @@ export function Interest() {
                 <a
                   href="https://www.abnamro.nl/nl/prive/hypotheken/actuele-hypotheekrente/index.html"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener"
                 >
                   ABN-AMRO
                 </a>
