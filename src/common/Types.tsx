@@ -13,6 +13,10 @@ export type MortgageData = {
   totals: {
     totalPaidGross: number;
     totalPaidNet: number;
+    totalInterestGross: number;
+    totalInterestNet: number;
+    totalInvestedGross: number;
+    totalInvestedNet: number;
   };
   monthly: Array<MonthMortgageData>;
 };

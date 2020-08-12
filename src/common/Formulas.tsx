@@ -25,6 +25,7 @@ export function PPMT(rate: number, per: number, nper: number, pv: number) {
 export function calculateAnnuityData(
   int: number,
   tax: number,
+  savings: number,
   loan: number,
 ): MortgageData {
   const rate = int / (12 * 100);
@@ -32,7 +33,7 @@ export function calculateAnnuityData(
   const pmt = PMT(rate, numberOfPeriods, loan);
 
   let totalPaidGross = 0;
-  let totalPaidNet = 0
+  let totalPaidNet = 0;
 
   const monthly = Array(360)
     .fill(0)
@@ -67,7 +68,11 @@ export function calculateAnnuityData(
     monthly,
     totals: {
       totalPaidGross,
-      totalPaidNet
+      totalPaidNet,
+      totalInterestGross: totalPaidGross - loan,
+      totalInterestNet: totalPaidNet - loan,
+      totalInvestedGross: totalPaidGross + savings,
+      totalInvestedNet: totalPaidNet + savings,
     },
   };
 }
@@ -75,6 +80,7 @@ export function calculateAnnuityData(
 export function calculateLinearData(
   int: number,
   tax: number,
+  savings: number,
   loan: number,
 ): MortgageData {
   const capitalPaid = loan / 360;
@@ -107,7 +113,11 @@ export function calculateLinearData(
     monthly,
     totals: {
       totalPaidGross,
-      totalPaidNet
+      totalPaidNet,
+      totalInterestGross: totalPaidGross - loan,
+      totalInterestNet: totalPaidNet - loan,
+      totalInvestedGross: totalPaidGross + savings,
+      totalInvestedNet: totalPaidNet + savings,
     },
   };
 }
@@ -129,7 +139,7 @@ export function calgulateLoanFigures({
   const transferTax = 0.02 * price;
   const nhgAvailable = price > MAX_NHG ? false : true;
 
-  const cost =
+  let cost =
     bankGuarantee +
     transferTax +
     notary +
@@ -139,6 +149,8 @@ export function calgulateLoanFigures({
     structuralSurvey;
 
   const loan = (price - savings + cost) / (nhgAvailable ? 1 - NHG_FEE : 1);
+
+  cost = cost + (nhgAvailable ? NHG_FEE * loan : 0);
 
   const percentage = loan / price;
 

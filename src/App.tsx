@@ -34,8 +34,6 @@ type InfoTabs = 'mortgage' | 'cost' | 'interest';
 type TableTabs = 'annuity' | 'linear' | 'graph';
 
 const App = (props: RouteComponentProps) => {
-  console.log('search: ', props.location.search);
-
   const search = queryString.parse(props.location.search, {
     parseNumbers: true,
   });
@@ -58,8 +56,18 @@ const App = (props: RouteComponentProps) => {
 
   const { loan, cost, percentage } = calgulateLoanFigures(state);
 
-  const linear = calculateLinearData(state.interest, state.deduction, loan);
-  const annuity = calculateAnnuityData(state.interest, state.deduction, loan);
+  const linear = calculateLinearData(
+    state.interest,
+    state.deduction,
+    state.savings,
+    loan,
+  );
+  const annuity = calculateAnnuityData(
+    state.interest,
+    state.deduction,
+    state.savings,
+    loan,
+  );
 
   function handleChange(field: string, value: number) {
     setState({ ...state, [field]: value });
@@ -91,20 +99,23 @@ const App = (props: RouteComponentProps) => {
         </section>
       </section>
       <section className="section">
-        <h1 className="subtitle">Mortage</h1>
+        <h1 className="subtitle">Mortgage</h1>
         <div className="tabs is-primary">
           <ul>
             <li className={infoTab === 'mortgage' ? 'is-active' : ''}>
+              {/* eslint-disable-next-line */}
               <a onClick={() => setInfoTab('mortgage')} role="button">
                 Mortgage
               </a>
             </li>
             <li className={infoTab === 'cost' ? 'is-active' : ''}>
+              {/* eslint-disable-next-line */}
               <a onClick={() => setInfoTab('cost')} role="button">
                 Purchase Costs
               </a>
             </li>
             <li className={infoTab === 'interest' ? 'is-active' : ''}>
+              {/* eslint-disable-next-line */}
               <a onClick={() => setInfoTab('interest')} role="button">
                 Interest
               </a>
@@ -117,40 +128,50 @@ const App = (props: RouteComponentProps) => {
           loan,
           cost,
           percentage,
-          annuity.totals.totalPaidGross,
-          linear.totals.totalPaidGross,
-          annuity.totals.totalPaidNet,
-          linear.totals.totalPaidNet,
+          annuity.totals,
+          linear.totals,
           handleChange,
         )}
       </section>
       <section className="section">
-        <h1 className="subtitle">Mortage Structure</h1>
+        <h1 className="subtitle">Mortgage Structure</h1>
         <div className="tabs is-primary">
           <ul>
             <li
               className={tab === 'annuity' ? 'is-active' : ''}
               onClick={() => setTab('annuity')}
             >
+              {/* eslint-disable-next-line */}
               <a>Annuity</a>
             </li>
             <li
               className={tab === 'linear' ? 'is-active' : ''}
               onClick={() => setTab('linear')}
             >
+              {/* eslint-disable-next-line */}
               <a>Linear</a>
             </li>
             <li
               className={tab === 'graph' ? 'is-active' : ''}
               onClick={() => setTab('graph')}
             >
+              {/* eslint-disable-next-line */}
               <a>Graph</a>
             </li>
           </ul>
         </div>
         {renderMortgageTabs(tab, annuity.monthly, linear.monthly)}
       </section>
+      <section className="section disclaimer">
+        <h3>Disclaimer:</h3>
+        <p>This calculator is for illustrative purposes only.</p>
+        <p>No guarantee is made for the accuracy of the data provided.</p>
+        <p>
+          Consult a qualified professional before making any decision.
+        </p>
+      </section>
       <section className="section">
+        {/* eslint-disable-next-line */}
         <a
           href="https://github.com/santiago-pan/mortgage-calculator"
           className="github-link"
@@ -175,10 +196,22 @@ function renderInfoTabs(
   loan: number,
   cost: number,
   percentage: number,
-  totalPaidGrossAnnuity: number,
-  totalPaidGrossLinear: number,
-  totalPaidNetAnnuity: number,
-  totalPaidNetLinear: number,
+  annuity: {
+    totalPaidGross: number;
+    totalPaidNet: number;
+    totalInterestGross: number;
+    totalInterestNet: number;
+    totalInvestedGross: number;
+    totalInvestedNet: number;
+  },
+  linear: {
+    totalPaidGross: number;
+    totalPaidNet: number;
+    totalInterestGross: number;
+    totalInterestNet: number;
+    totalInvestedGross: number;
+    totalInvestedNet: number;
+  },
   handleChange: (field: string, value: number) => void,
 ) {
   switch (tab) {
@@ -192,10 +225,8 @@ function renderInfoTabs(
           interest={state.interest}
           percentage={percentage}
           deduction={state.deduction}
-          totalPaidGrossAnnuity={totalPaidGrossAnnuity}
-          totalPaidGrossLinear={totalPaidGrossLinear}
-          totalPaidNetAnnuity={totalPaidNetAnnuity}
-          totalPaidNetLinear={totalPaidNetLinear}
+          annuity={annuity}
+          linear={linear}
           onChange={handleChange}
         />
       );

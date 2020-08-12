@@ -12,6 +12,10 @@ tr {
   color: #4b4f58;
 }
 
+.icon.is-small.is-right {
+  right: 12px
+}
+
 .table tbody tr td {
   font-size: 0.75rem;
 }
@@ -22,7 +26,16 @@ tr {
 
 .control.has-icons-left .input {
   color: #4b4f58;
-  /* font-size: 0.75rem; */
+  font-size: 0.75rem;
+}
+
+.control.has-icons-left span {
+  height: 30px;
+  font-size: 0.75rem;
+}
+
+.columns .column .field label {
+  font-size: 0.9rem;
 }
 
 .table tbody tr td span {
@@ -39,7 +52,6 @@ tr {
 }
 
 .github-link {
-  display: flex;
   text-size-adjust: 100%;
   -webkit-box-align: center;
   align-items: center;
@@ -55,4 +67,8 @@ tr {
   border-color: rgb(203, 203, 203);
   border-image: initial;
   overflow: hidden;
+}
+
+.disclaimer p {
+  font-size: 0.75rem;
 }

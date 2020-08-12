@@ -26,14 +26,12 @@ export function Costs(props: Props) {
       <div className="columns">
         <div className="column">
           <InputField
-            title="Transfer Tax"
+            title="Transfer tax"
             prepend="€"
             disabled
             value={transferTax}
             onChange={() => {}}
           />
-        </div>
-        <div className="column">
           <InputField
             title="Valuation"
             prepend="€"
@@ -42,29 +40,22 @@ export function Costs(props: Props) {
               props.onChange('valuation', parseInt(value, 10))
             }
           />
-        </div>
-        <div className="column">
           <InputField
-            title="Real State Agent"
+            title="Real estate agent"
             prepend="€"
             value={props.realStateAgent}
             onChange={(value) =>
               props.onChange('realStateAgent', parseInt(value, 10))
             }
           />
-        </div>
-        <div className="column">
           <InputField
-            title="Bank Guarantee"
+            title="Bank guarantee"
             prepend="€"
             disabled
             value={bankGuarantee}
             onChange={() => {}}
           />
         </div>
-      </div>
-
-      <div className="columns">
         <div className="column">
           <InputField
             title="Notary"
@@ -72,18 +63,14 @@ export function Costs(props: Props) {
             value={props.notary}
             onChange={(value) => props.onChange('notary', parseInt(value, 10))}
           />
-        </div>
-        <div className="column">
           <InputField
-            title="Financial Advisor"
+            title="Financial advisor"
             prepend="€"
             value={props.financialAdvisor}
             onChange={(value) =>
               props.onChange('financialAdvisor', parseInt(value, 10))
             }
           />
-        </div>
-        <div className="column">
           <InputField
             title="NHG"
             prepend="€"
@@ -91,10 +78,8 @@ export function Costs(props: Props) {
             value={nhg}
             onChange={() => {}}
           />
-        </div>
-        <div className="column">
           <InputField
-            title="Structural Survey"
+            title="Structural survey"
             prepend="€"
             value={props.structuralSurvey}
             onChange={(value) =>

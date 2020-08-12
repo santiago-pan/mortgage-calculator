@@ -1,11 +1,10 @@
 import React from 'react';
 import NumberFormat from 'react-number-format';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faInfo } from '@fortawesome/free-solid-svg-icons';
 
 type InputFieldProps = {
   title: string;
   prepend?: string;
+  append?: string;
   value: string | number;
   onChange: (value: string) => void;
   disabled?: boolean;
@@ -16,7 +15,6 @@ export function InputField(props: InputFieldProps) {
     <>
       <div className="field">
         <label>{props.title}</label>
-        {/* <FontAwesomeIcon icon={faInfo} title="How much of your own savings" /> */}
         <div className="control has-icons-left">
           <NumberFormat
             decimalScale={2}
