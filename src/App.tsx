@@ -93,7 +93,7 @@ const App = (props: RouteComponentProps) => {
           <div className="hero-body">
             <h1 className="title">Mortgage Calculator</h1>
             <h1 className="subtitle">
-              Annuity and Linear mortgage calculator for The Netherlands
+              Annuity and Linear mortgage calculator for the Netherlands
             </h1>
           </div>
         </section>
