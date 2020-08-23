@@ -1,5 +1,4 @@
 import React from 'react';
-import NumberFormat from 'react-number-format';
 import { MonthMortgageData } from '../common/Types';
 
 type TableProps = {
@@ -9,13 +8,8 @@ type TableProps = {
 function TableNumber(props: { value: number }) {
   return (
     <td style={{ width: '200px' }}>
-      <NumberFormat
-        value={props.value}
-        displayType={'text'}
-        thousandSeparator={true}
-        suffix={'€'}
-        decimalScale={2}
-      />
+      {(Math.round(props.value * 100) / 100).toFixed(2)}
+      {'€'}
     </td>
   );
 }
@@ -23,7 +17,7 @@ function TableNumber(props: { value: number }) {
 export function DataTable(props: TableProps) {
   return (
     <div className="table-container">
-      <table className="table is-striped is-narrow" >
+      <table className="table is-striped is-narrow">
         <thead>
           <tr>
             <th>#</th>

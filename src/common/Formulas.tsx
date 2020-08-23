@@ -23,17 +23,18 @@ export function PPMT(rate: number, per: number, nper: number, pv: number) {
 }
 
 export function calculateAnnuityData(
-  int: number,
-  tax: number,
+  loanInterest: number,
+  taxDeduction: number,
   savings: number,
   loan: number,
 ): MortgageData {
-  const rate = int / (12 * 100);
+  const rate = loanInterest / (12 * 100);
   const numberOfPeriods = 360;
   const pmt = PMT(rate, numberOfPeriods, loan);
 
   let totalPaidGross = 0;
   let totalPaidNet = 0;
+  let accPaid = 0
 
   const monthly = Array(360)
     .fill(0)
@@ -41,16 +42,15 @@ export function calculateAnnuityData(
       const period = i + 1;
       const ppmt = -PPMT(rate, period, numberOfPeriods, loan);
       const ipmt = -IPMT(loan, pmt, rate, period);
-
       let capitalPaid = ppmt;
       const interest = ipmt;
       const grossPaid = capitalPaid + interest;
-      const balance = loan - totalPaidGross;
+      const balance = loan - accPaid;
       totalPaidGross += grossPaid;
-      const deduction = (interest * tax) / 100;
+      const deduction = (interest * taxDeduction) / 100;
       const netPaid = grossPaid - deduction;
       totalPaidNet += netPaid;
-      const remaining = Math.round((balance - capitalPaid) * 100) / 100;
+      accPaid += capitalPaid
 
       return {
         month: i + 1,
@@ -58,7 +58,6 @@ export function calculateAnnuityData(
         grossPaid,
         capitalPaid,
         interest,
-        remaining,
         deduction,
         netPaid,
       };
@@ -78,8 +77,8 @@ export function calculateAnnuityData(
 }
 
 export function calculateLinearData(
-  int: number,
-  tax: number,
+  loanInterest: number,
+  taxDeduction: number,
   savings: number,
   loan: number,
 ): MortgageData {
@@ -90,10 +89,9 @@ export function calculateLinearData(
     .fill(0)
     .map((v, i) => {
       const balance = loan - capitalPaid * i;
-      const interest = balance * (int / (12 * 100));
+      const interest = balance * (loanInterest / (12 * 100));
       const grossPaid = capitalPaid + interest;
-      const remaining = balance - capitalPaid;
-      const deduction = (interest * tax) / 100;
+      const deduction = (interest * taxDeduction) / 100;
       const netPaid = grossPaid - deduction;
       totalPaidNet += netPaid;
       totalPaidGross += grossPaid;
@@ -103,7 +101,6 @@ export function calculateLinearData(
         grossPaid,
         capitalPaid,
         interest,
-        remaining,
         deduction,
         netPaid,
       };

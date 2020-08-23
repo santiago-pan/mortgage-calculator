@@ -17,7 +17,7 @@ tr {
 }
 
 .table tbody tr td {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 
 .input {
@@ -26,12 +26,12 @@ tr {
 
 .control.has-icons-left .input {
   color: #4b4f58;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 
 .control.has-icons-left span {
   height: 30px;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 
 .columns .column .field label {
@@ -39,7 +39,7 @@ tr {
 }
 
 .table tbody tr td span {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 
 .github-inner {
@@ -70,5 +70,5 @@ tr {
 }
 
 .disclaimer p {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }

@@ -4,7 +4,6 @@ export type MonthMortgageData = {
   grossPaid: number;
   capitalPaid: number;
   interest: number;
-  remaining: number;
   deduction: number;
   netPaid: number;
 }

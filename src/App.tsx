@@ -1,5 +1,5 @@
 import queryString from 'query-string';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import './App.sass';
 import {
@@ -56,17 +56,21 @@ const App = (props: RouteComponentProps) => {
 
   const { loan, cost, percentage } = calgulateLoanFigures(state);
 
-  const linear = calculateLinearData(
-    state.interest,
-    state.deduction,
-    state.savings,
-    loan,
+  const linear = useMemo(
+    () =>
+      calculateLinearData(state.interest, state.deduction, state.savings, loan),
+    [state.interest, state.deduction, state.savings, loan],
   );
-  const annuity = calculateAnnuityData(
-    state.interest,
-    state.deduction,
-    state.savings,
-    loan,
+
+  const annuity = useMemo(
+    () =>
+      calculateAnnuityData(
+        state.interest,
+        state.deduction,
+        state.savings,
+        loan,
+      ),
+    [state.interest, state.deduction, state.savings, loan],
   );
 
   function handleChange(field: string, value: number) {
@@ -166,9 +170,7 @@ const App = (props: RouteComponentProps) => {
         <h3>Disclaimer:</h3>
         <p>This calculator is for illustrative purposes only.</p>
         <p>No guarantee is made for the accuracy of the data provided.</p>
-        <p>
-          Consult a qualified professional before making any decision.
-        </p>
+        <p>Consult a qualified professional before making any decision.</p>
       </section>
       <section className="section">
         {/* eslint-disable-next-line */}
