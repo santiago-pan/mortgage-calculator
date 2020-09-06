@@ -123,16 +123,16 @@ export function Mortgage(props: Props) {
             field={null}
           />
           <ColumnInputField
-            title="Total cost - Total rent (gross)"
+            title="Total rent - Total cost (gross)"
             prepend="€"
-            value={props.annuity.totalInvestedGross - props.rent * 360}
+            value={props.rent * 360 - props.annuity.totalInvestedGross}
             field={null}
             disabled
           />
           <ColumnInputField
-            title="Total cost - Total rent (net)"
+            title="Total rent - Total cost (net)"
             prepend="€"
-            value={props.annuity.totalInvestedNet - props.rent * 360}
+            value={props.rent * 360 - props.annuity.totalInvestedNet}
             field={null}
             disabled
           />
