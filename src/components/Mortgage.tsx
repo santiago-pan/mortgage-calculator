@@ -9,6 +9,7 @@ type Props = {
   interest: number;
   percentage: number;
   deduction: number;
+  rent: number;
   annuity: {
     totalPaidGross: number;
     totalPaidNet: number;
@@ -81,8 +82,6 @@ export function Mortgage(props: Props) {
             field={null}
             disabled
           />
-        </div>
-        <div className="column">
           <ColumnInputField
             title="Required loan"
             prepend="€"
@@ -97,6 +96,8 @@ export function Mortgage(props: Props) {
             field={null}
             disabled
           />
+        </div>
+        <div className="column">
           <ColumnInputField
             title="Interest"
             prepend="%"
@@ -109,12 +110,52 @@ export function Mortgage(props: Props) {
             value={props.deduction}
             field={'deduction'}
           />
+          <ColumnInputField
+            title="Current rent"
+            prepend="€"
+            value={props.rent}
+            field={'rent'}
+          />
+          <ColumnInputField
+            title="Total invested on rent (30 years)"
+            prepend="€"
+            value={props.rent * 360}
+            field={null}
+          />
+          <ColumnInputField
+            title="Total cost - Total rent (gross)"
+            prepend="€"
+            value={props.annuity.totalInvestedGross - props.rent * 360}
+            field={null}
+            disabled
+          />
+          <ColumnInputField
+            title="Total cost - Total rent (net)"
+            prepend="€"
+            value={props.annuity.totalInvestedNet - props.rent * 360}
+            field={null}
+            disabled
+          />
         </div>
         <div className="column">
           <ColumnInputField
             title="Annuity - Total repaid (gross)"
             prepend="€"
             value={props.annuity.totalPaidGross}
+            field={null}
+            disabled
+          />
+          <ColumnInputField
+            title="Annuity - Total interest (gross)"
+            prepend="€"
+            value={props.annuity.totalInterestGross}
+            field={null}
+            disabled
+          />
+          <ColumnInputField
+            title="Annuity - Total invested (gross)"
+            prepend="€"
+            value={props.annuity.totalInvestedGross}
             field={null}
             disabled
           />
@@ -126,16 +167,16 @@ export function Mortgage(props: Props) {
             disabled
           />
           <ColumnInputField
-            title="Annuity - Total interest"
+            title="Annuity - Total interest (net)"
             prepend="€"
-            value={props.annuity.totalInterestGross}
+            value={props.annuity.totalInterestNet}
             field={null}
             disabled
           />
           <ColumnInputField
-            title="Annuity - Total invested"
+            title="Annuity - Total invested (net)"
             prepend="€"
-            value={props.annuity.totalInvestedGross}
+            value={props.annuity.totalInvestedNet}
             field={null}
             disabled
           />
@@ -149,6 +190,20 @@ export function Mortgage(props: Props) {
             disabled
           />
           <ColumnInputField
+            title="Linear - Total interest (gross)"
+            prepend="€"
+            value={props.linear.totalInterestGross}
+            field={null}
+            disabled
+          />
+          <ColumnInputField
+            title="Linear - Total invested (gross)"
+            prepend="€"
+            value={props.linear.totalInvestedGross}
+            field={null}
+            disabled
+          />
+          <ColumnInputField
             title="Linear - Total repaid (net)"
             prepend="€"
             value={props.linear.totalPaidNet}
@@ -156,16 +211,16 @@ export function Mortgage(props: Props) {
             disabled
           />
           <ColumnInputField
-            title="Linear - Total interest"
+            title="Linear - Total interest (net)"
             prepend="€"
-            value={props.linear.totalInterestGross}
+            value={props.linear.totalInterestNet}
             field={null}
             disabled
           />
           <ColumnInputField
-            title="Linear - Total invested"
+            title="Linear - Total invested (net)"
             prepend="€"
-            value={props.linear.totalInvestedGross}
+            value={props.linear.totalInvestedNet}
             field={null}
             disabled
           />

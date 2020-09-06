@@ -15,6 +15,7 @@ const state: AppState = {
   savings: 40000,
   interest: 1.34,
   deduction: 36.93,
+  rent: 1300,
 };
 
 it('calculates loan figures', () => {
@@ -135,4 +136,17 @@ it('calculates linear data', () => {
     totalPaidGross: 344628.22650218196,
     totalPaidNet: 323278.8079534151,
   });
+});
+
+it('calculates savings vs total invested curve', () => {
+  for (let s = 0; s < 21; s++) {
+    state.savings = 20000 + s*1000;
+    const figures = calgulateLoanFigures(state);
+    const annuityData = calculateAnnuityData(
+      state.interest,
+      state.deduction,
+      state.savings,
+      figures.loan,
+    );
+  }
 });

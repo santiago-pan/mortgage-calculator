@@ -21,6 +21,7 @@ export type AppState = {
   interest: number;
   deduction: number;
   savings: number;
+  rent: number;
 
   // costs
   notary: number;
@@ -43,11 +44,12 @@ const App = (props: RouteComponentProps) => {
     interest: (search.interest as number) || 1.34,
     deduction: (search.deduction as number) || 36.93,
     savings: (search.savings as number) || 40000,
+    rent: (search.rent as number) || 1300,
 
     notary: 1200,
     valuation: 800,
     financialAdvisor: 2500,
-    realStateAgent: 3000,
+    realStateAgent: 2750*1.21,
     structuralSurvey: 800,
   });
 
@@ -83,6 +85,7 @@ const App = (props: RouteComponentProps) => {
       interest: state.interest,
       deduction: state.deduction,
       savings: state.savings,
+      rent: state.rent
     });
 
     if (props.location.search !== '?' + stateQueryString) {
@@ -227,6 +230,7 @@ function renderInfoTabs(
           interest={state.interest}
           percentage={percentage}
           deduction={state.deduction}
+          rent={state.rent}
           annuity={annuity}
           linear={linear}
           onChange={handleChange}
