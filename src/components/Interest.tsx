@@ -1,5 +1,5 @@
 import React from 'react';
-import NumberFormat from 'react-number-format';
+import { NumericFormat } from 'react-number-format';
 
 const intervals = [
   'Fix rate',
@@ -50,7 +50,7 @@ export const interests = [
 function TableNumber(props: { value: string; suffix: string | '€' }) {
   return (
     <td>
-      <NumberFormat
+      <NumericFormat
         value={props.value}
         displayType={'text'}
         thousandSeparator={true}

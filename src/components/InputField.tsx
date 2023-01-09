@@ -1,5 +1,5 @@
 import React from 'react';
-import NumberFormat from 'react-number-format';
+import { NumericFormat } from 'react-number-format';
 
 type InputFieldProps = {
   title: string;
@@ -16,7 +16,8 @@ export function InputField(props: InputFieldProps) {
       <div className="field">
         <label>{props.title}</label>
         <div className="control has-icons-left">
-          <NumberFormat
+          <NumericFormat
+            inputMode={'decimal'}
             decimalScale={2}
             customInput={(field) => {
               return (

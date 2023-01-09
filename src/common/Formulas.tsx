@@ -30,27 +30,31 @@ export function calculateAnnuityData(
 ): MortgageData {
   const rate = loanInterest / (12 * 100);
   const numberOfPeriods = 360;
-  const pmt = PMT(rate, numberOfPeriods, loan);
 
   let totalPaidGross = 0;
   let totalPaidNet = 0;
-  let accPaid = 0
+  let accPaid = 0;
 
+  const payOff = 0;
+  const payOffPeriod = 0;
   const monthly = Array(360)
     .fill(0)
     .map((v, i) => {
-      const period = i + 1;
-      const ppmt = -PPMT(rate, period, numberOfPeriods, loan);
-      const ipmt = -IPMT(loan, pmt, rate, period);
-      let capitalPaid = ppmt;
+      //const period = i + 1;
+      let balance = loan - accPaid;
+      balance = Math.max(balance, 0);
+      const pmt = PMT(rate, numberOfPeriods - i, balance);
+      const ppmt = -PPMT(rate, 1, numberOfPeriods - i, balance);
+      const ipmt = -IPMT(balance, pmt, rate, 1);
+      let capitalPaid =
+        ppmt + (i < payOffPeriod ? (balance > 0 ? payOff : 0) : 0);
       const interest = ipmt;
       const grossPaid = capitalPaid + interest;
-      const balance = loan - accPaid;
       totalPaidGross += grossPaid;
       const deduction = (interest * taxDeduction) / 100;
       const netPaid = grossPaid - deduction;
       totalPaidNet += netPaid;
-      accPaid += capitalPaid
+      accPaid += capitalPaid;
 
       return {
         month: i + 1,

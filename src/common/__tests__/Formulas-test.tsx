@@ -53,33 +53,33 @@ it('calculates annuity data', () => {
 
   // 15 years
   expect(annuityData.monthly[179]).toEqual({
-    balance: 158556.10478164168,
-    capitalPaid: 790.9408766278759,
-    deduction: 65.38615927037786,
-    grossPaid: 967.995193634044,
-    interest: 177.05431700616805,
+    balance: 158556.10478164203,
+    capitalPaid: 790.9408766278708,
+    deduction: 65.38615927037745,
+    grossPaid: 967.9951936340377,
+    interest: 177.05431700616694,
     month: 180,
-    netPaid: 902.6090343636661,
+    netPaid: 902.6090343636603,
   });
 
   // 30 years
   expect(annuityData.monthly[359]).toEqual({
-    balance: 966.9154713546159,
-    capitalPaid: 966.9154713576945,
-    deduction: 0.3987414366558756,
-    grossPaid: 967.995193634044,
-    interest: 1.0797222763495142,
+    balance: 966.9154713575845,
+    capitalPaid: 966.9154713575948,
+    deduction: 0.3987414366557974,
+    grossPaid: 967.9951936339442,
+    interest: 1.0797222763493026,
     month: 360,
-    netPaid: 967.5964521973881,
+    netPaid: 967.5964521972884,
   });
 
   expect(annuityData.totals).toEqual({
-    totalInterestGross: 61660.545639776916,
-    totalInterestNet: 38889.30613500846,
-    totalInvestedGross: 388478.2697082563,
-    totalInvestedNet: 365707.03020348784,
-    totalPaidGross: 348478.2697082563,
-    totalPaidNet: 325707.03020348784,
+    totalInterestGross: 61660.54563977168,
+    totalInterestNet: 38889.30613500468,
+    totalInvestedGross: 388478.26970825106,
+    totalInvestedNet: 365707.03020348406,
+    totalPaidGross: 348478.26970825106,
+    totalPaidNet: 325707.03020348406,
   });
 });
 
@@ -140,7 +140,7 @@ it('calculates linear data', () => {
 
 it('calculates savings vs total invested curve', () => {
   for (let s = 0; s < 21; s++) {
-    state.savings = 20000 + s*1000;
+    state.savings = 20000 + s * 1000;
     const figures = calgulateLoanFigures(state);
     const annuityData = calculateAnnuityData(
       state.interest,
