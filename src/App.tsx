@@ -43,7 +43,7 @@ const App = (props: RouteComponentProps) => {
     price: (search.price as number) || 310000,
     interest: (search.interest as number) || 1.34,
     deduction: (search.deduction as number) || 36.93,
-    savings: (search.savings as number) || 40000,
+    savings: (search.savings as number) ?? 40000,
     rent: (search.rent as number) || 1300,
 
     notary: 1200,
