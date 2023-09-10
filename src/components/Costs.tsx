@@ -1,8 +1,8 @@
 import React from 'react';
 import { InputField } from './InputField';
 
-export const MAX_NHG = 310000;
-export const NHG_FEE = 0.007;
+export const MAX_NHG = 405000;
+export const NHG_FEE = 0.006;
 
 type Props = {
   price: number;

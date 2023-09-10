@@ -41,10 +41,10 @@ const App = (props: RouteComponentProps) => {
 
   const [state, setState] = useState<AppState>({
     price: (search.price as number) || 310000,
-    interest: (search.interest as number) || 1.34,
+    interest: (search.interest as number) || 4.62,
     deduction: (search.deduction as number) || 36.93,
     savings: (search.savings as number) || 40000,
-    rent: (search.rent as number) || 1300,
+    rent: (search.rent as number) || 1600,
 
     notary: 1200,
     valuation: 800,
@@ -99,9 +99,9 @@ const App = (props: RouteComponentProps) => {
         <section className="hero is-primary">
           <div className="hero-body">
             <h1 className="title">Mortgage Calculator</h1>
-            <h1 className="subtitle">
+            <h2 className="subtitle">
               Annuity and Linear mortgage calculator for the Netherlands
-            </h1>
+            </h2>
           </div>
         </section>
       </section>
