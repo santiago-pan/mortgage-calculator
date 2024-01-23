@@ -30,7 +30,7 @@ export function Costs(props: Props) {
             prepend="€"
             disabled
             value={transferTax}
-            onChange={() => { }}
+            onChange={() => {}}
           />
           <InputField
             title="Valuation"
@@ -53,7 +53,7 @@ export function Costs(props: Props) {
             prepend="€"
             disabled
             value={bankGuarantee}
-            onChange={() => { }}
+            onChange={() => {}}
           />
         </div>
         <div className="column">
@@ -76,7 +76,7 @@ export function Costs(props: Props) {
             prepend="€"
             disabled
             value={nhg}
-            onChange={() => { }}
+            onChange={() => {}}
           />
           <InputField
             title="Structural survey"
