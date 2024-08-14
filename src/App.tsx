@@ -25,6 +25,8 @@ export type AppState = {
 
   // costs
   notary: number;
+  transferTax: number;
+  transferTaxEnabled: number;
   valuation: number;
   financialAdvisor: number;
   realStateAgent: number;
@@ -47,9 +49,11 @@ const App = (props: RouteComponentProps) => {
     rent: (search.rent as number) || 1600,
 
     notary: 1200,
+    transferTax: ((search.price as number) || 310000) * 0.02,
+    transferTaxEnabled: 1,
     valuation: 800,
     financialAdvisor: 2500,
-    realStateAgent: 2750*1.21,
+    realStateAgent: 2750 * 1.21,
     structuralSurvey: 800,
   });
 
@@ -76,7 +80,11 @@ const App = (props: RouteComponentProps) => {
   );
 
   function handleChange(field: string, value: number) {
-    setState({ ...state, [field]: value });
+    setState({
+      ...state,
+      [field]: value,
+      transferTax: field === 'price' ? value * 0.02 : state.price * 0.02,
+    });
   }
 
   useEffect(() => {
@@ -85,7 +93,7 @@ const App = (props: RouteComponentProps) => {
       interest: state.interest,
       deduction: state.deduction,
       savings: state.savings,
-      rent: state.rent
+      rent: state.rent,
     });
 
     if (props.location.search !== '?' + stateQueryString) {

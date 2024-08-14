@@ -13,7 +13,7 @@ tr {
 }
 
 .icon.is-small.is-right {
-  right: 12px
+  right: 12px;
 }
 
 .table tbody tr td {
@@ -71,4 +71,12 @@ tr {
 
 .disclaimer p {
   font-size: 0.85rem;
+}
+
+.input-toggle {
+  float: right;
+}
+
+.strikethrough {
+  text-decoration: line-through;
 }

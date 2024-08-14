@@ -9,6 +9,8 @@ type Props = {
   savings: number;
   loan: number;
   notary: number;
+  transferTax: number;
+  transferTaxEnabled: number;
   valuation: number;
   financialAdvisor: number;
   realStateAgent: number;
@@ -18,7 +20,6 @@ type Props = {
 
 export function Costs(props: Props) {
   const bankGuarantee = 0.001 * props.price;
-  const transferTax = 0.02 * props.price;
   const nhg = props.price > MAX_NHG ? 0 : NHG_FEE * props.loan;
 
   return (
@@ -28,9 +29,15 @@ export function Costs(props: Props) {
           <InputField
             title="Transfer tax"
             prepend="€"
+            toggle={!!props.transferTaxEnabled}
+            onToggle={(checked) =>
+              props.onChange('transferTaxEnabled', +checked)
+            }
             disabled
-            value={transferTax}
-            onChange={() => {}}
+            value={props.transferTax}
+            onChange={(value) =>
+              props.onChange('transferTax', parseInt(value, 10))
+            }
           />
           <InputField
             title="Valuation"

@@ -5,16 +5,33 @@ type InputFieldProps = {
   title: string;
   prepend?: string;
   append?: string;
+  toggle?: boolean;
+  onToggle?: (checked: boolean) => void;
   value: string | number;
   onChange: (value: string) => void;
   disabled?: boolean;
 };
 
 export function InputField(props: InputFieldProps) {
+  const handleCheck = (e: any) => {
+    props.onToggle && props.onToggle(!props.toggle);
+  };
+
   return (
     <>
       <div className="field">
-        <label>{props.title}</label>
+        <label>
+          {props.title}
+          {props.onToggle && (
+            <span className="input-toggle">
+              <input
+                checked={props.toggle}
+                type="checkbox"
+                onChange={handleCheck}
+              />
+            </span>
+          )}
+        </label>
         <div className="control has-icons-left">
           <NumericFormat
             inputMode={'decimal'}
@@ -22,7 +39,13 @@ export function InputField(props: InputFieldProps) {
             customInput={(field) => {
               return (
                 <>
-                  <input className="input" {...field} />
+                  <input
+                    className={
+                      'input' +
+                      (props?.onToggle && !props.toggle ? ' strikethrough' : '')
+                    }
+                    {...field}
+                  />
                   <span className="icon is-small is-left">
                     <i className="fas">{props.prepend}</i>
                   </span>

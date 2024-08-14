@@ -126,6 +126,8 @@ export function calculateLinearData(
 export function calgulateLoanFigures({
   price,
   notary,
+  transferTax,
+  transferTaxEnabled,
   valuation,
   financialAdvisor,
   realStateAgent,
@@ -137,12 +139,11 @@ export function calgulateLoanFigures({
   percentage: number;
 } {
   const bankGuarantee = 0.001 * price;
-  const transferTax = 0.02 * price;
   const nhgAvailable = price > MAX_NHG ? false : true;
 
   let cost =
     bankGuarantee +
-    transferTax +
+    transferTax * transferTaxEnabled +
     notary +
     valuation +
     financialAdvisor +
