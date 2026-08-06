@@ -16,6 +16,12 @@ export type MortgageData = {
     totalInterestNet: number;
     totalInvestedGross: number;
     totalInvestedNet: number;
+    payoffMonth: number;
   };
   monthly: Array<MonthMortgageData>;
+};
+
+export type Overpayment = {
+  monthly: number;
+  lumpSum?: { month: number; amount: number };
 };
