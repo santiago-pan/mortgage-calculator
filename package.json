@@ -2,39 +2,46 @@
   "name": "mortgage-calculator",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "dependencies": {
-    "bulma": "^0.9.4",
-    "query-string": "^6.12.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-number-format": "^5.1.2",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^5.0.1",
-    "recharts": "^2.0.0-beta.5",
-    "sass": "^1.57.1",
-    "typescript": "^4.9.4"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-number-format": "^5.4.5",
+    "recharts": "^3.10.1"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^26.0.10",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-router-dom": "^5.1.5",
-    "@types/recharts": "^1.8.5"
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@testing-library/jest-dom": "^7.0.0",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^26.1.2",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^6.0.4",
+    "eslint": "^10.8.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.8.0",
+    "jsdom": "^30.0.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.65.0",
+    "vite": "^8.1.5",
+    "vitest": "^4.1.10"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
     "invalidate": "aws cloudfront create-invalidation --distribution-id E2K5CCBOOMKKA6 --paths / --profile santiago",
-    "deploy": "npm run build && aws s3 sync --acl public-read build/. s3://whathemortgage.com/ --profile santiago && npm run invalidate"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "deploy": "npm run build && aws s3 sync --acl public-read dist/. s3://whathemortgage.com/ --profile santiago && npm run invalidate"
   },
   "browserslist": {
     "production": [

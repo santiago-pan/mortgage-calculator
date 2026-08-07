@@ -2,6 +2,7 @@ import {
   calculateAnnuityData,
   calgulateLoanFigures,
   calculateLinearData,
+  calculateBreakEvenMonth,
 } from '../Formulas';
 import { AppState } from '../../App';
 
@@ -16,15 +17,25 @@ const state: AppState = {
   interest: 1.34,
   deduction: 36.93,
   rent: 1300,
+  costEnabled: {
+    notary: true,
+    valuation: true,
+    financialAdvisor: true,
+    realStateAgent: true,
+    structuralSurvey: true,
+  },
+  overpaymentMonthly: 0,
+  overpaymentLumpSumMonth: 0,
+  overpaymentLumpSumAmount: 0,
 };
 
 it('calculates loan figures', () => {
   const figures = calgulateLoanFigures(state);
 
   expect(figures).toEqual({
-    cost: 16817.724068479354,
-    loan: 286817.7240684794,
-    percentage: 0.9252184647370303,
+    cost: 16529.175050301812,
+    loan: 286529.1750503018,
+    percentage: 0.9242876614525866,
   });
 });
 
@@ -42,44 +53,45 @@ it('calculates annuity data', () => {
 
   // First month
   expect(annuityData.monthly[0]).toEqual({
-    balance: 286817.7240684794,
-    capitalPaid: 647.7154017575754,
-    deduction: 118.27932713997986,
-    grossPaid: 967.995193634044,
-    interest: 320.2797918764686,
+    balance: 286529.1750503018,
+    capitalPaid: 647.0637766049017,
+    deduction: 118.16033385311871,
+    grossPaid: 967.0213554110721,
+    interest: 319.9575788061704,
     month: 1,
-    netPaid: 849.7158664940641,
+    netPaid: 848.8610215579534,
   });
 
   // 15 years
   expect(annuityData.monthly[179]).toEqual({
-    balance: 158556.10478164203,
-    capitalPaid: 790.9408766278708,
-    deduction: 65.38615927037745,
-    grossPaid: 967.9951936340377,
-    interest: 177.05431700616694,
+    balance: 158396.591597757,
+    capitalPaid: 790.1451614602366,
+    deduction: 65.32037842604102,
+    grossPaid: 967.0213554110653,
+    interest: 176.87619395082865,
     month: 180,
-    netPaid: 902.6090343636603,
+    netPaid: 901.7009769850243,
   });
 
   // 30 years
   expect(annuityData.monthly[359]).toEqual({
-    balance: 966.9154713575845,
-    capitalPaid: 966.9154713575948,
-    deduction: 0.3987414366557974,
-    grossPaid: 967.9951936339442,
-    interest: 1.0797222763493026,
+    balance: 965.9427193743177,
+    capitalPaid: 965.942719374328,
+    deduction: 0.398340288329178,
+    grossPaid: 967.0213554109627,
+    interest: 1.0786360366346548,
     month: 360,
-    netPaid: 967.5964521972884,
+    netPaid: 966.6230151226334,
   });
 
   expect(annuityData.totals).toEqual({
-    totalInterestGross: 61660.54563977168,
-    totalInterestNet: 38889.30613500468,
-    totalInvestedGross: 388478.26970825106,
-    totalInvestedNet: 365707.03020348406,
-    totalPaidGross: 348478.26970825106,
-    totalPaidNet: 325707.03020348406,
+    totalInterestGross: 61598.51289767987,
+    totalInterestNet: 38850.18208456715,
+    totalInvestedGross: 388127.6879479817,
+    totalInvestedNet: 365379.357134869,
+    totalPaidGross: 348127.6879479817,
+    totalPaidNet: 325379.357134869,
+    payoffMonth: 360,
   });
 });
 
@@ -97,52 +109,131 @@ it('calculates linear data', () => {
 
   // First month
   expect(linearData.monthly[0]).toEqual({
-    balance: 286817.7240684794,
-    capitalPaid: 796.7159001902205,
-    deduction: 118.27932713997986,
-    grossPaid: 1116.9956920666891,
-    interest: 320.2797918764686,
+    balance: 286529.1750503018,
+    capitalPaid: 795.9143751397273,
+    deduction: 118.16033385311871,
+    grossPaid: 1115.8719539458978,
+    interest: 319.9575788061704,
     month: 1,
-    netPaid: 998.7163649267093,
+    netPaid: 997.7116200927791,
   });
 
   // 15 years
   expect(linearData.monthly[179]).toEqual({
-    balance: 144205.57793442992,
-    capitalPaid: 796.7159001902205,
-    deduction: 59.46821725648988,
-    grossPaid: 957.7454622170005,
-    interest: 161.02956202678007,
+    balance: 144060.50190029063,
+    capitalPaid: 795.9143751397273,
+    deduction: 59.408390076151356,
+    grossPaid: 956.7819355950519,
+    interest: 160.86756045532454,
     month: 180,
-    netPaid: 898.2772449605106,
+    netPaid: 897.3735455189005,
   });
 
   // 30 years
   expect(linearData.monthly[359]).toEqual({
-    balance: 796.7159001902328,
-    capitalPaid: 796.7159001902205,
-    deduction: 0.32855368649994915,
-    grossPaid: 797.6055662787662,
-    interest: 0.8896660885457599,
+    balance: 795.9143751396914,
+    capitalPaid: 795.9143751397273,
+    deduction: 0.3282231495919817,
+    grossPaid: 796.8031461919667,
+    interest: 0.8887710522393221,
     month: 360,
-    netPaid: 797.2770125922663,
+    netPaid: 796.4749230423747,
   });
 
   expect(linearData.totals).toEqual({
-    totalInterestGross: 57810.50243370258,
-    totalInterestNet: 36461.08388493571,
-    totalInvestedGross: 384628.22650218196,
-    totalInvestedNet: 363278.8079534151,
-    totalPaidGross: 344628.22650218196,
-    totalPaidNet: 323278.8079534151,
+    totalInterestGross: 57752.342974515515,
+    totalInterestNet: 36424.40271402575,
+    totalInvestedGross: 384281.51802481734,
+    totalInvestedNet: 362953.5777643276,
+    totalPaidGross: 344281.51802481734,
+    totalPaidNet: 322953.5777643276,
+    payoffMonth: 360,
   });
+});
+
+it('calculates annuity data with overpayment (recurring + lump sum)', () => {
+  const figures = calgulateLoanFigures(state);
+  const overpayment = { monthly: 500, lumpSum: { month: 12, amount: 5000 } };
+
+  const annuityData = calculateAnnuityData(
+    state.interest,
+    state.deduction,
+    state.savings,
+    figures.loan,
+    overpayment,
+  );
+
+  expect(annuityData.totals.payoffMonth).toBe(296);
+  expect(annuityData.totals).toEqual({
+    totalPaidGross: 328740.5991177818,
+    totalPaidNet: 313151.9202096612,
+    totalInterestGross: 42211.424067479966,
+    totalInterestNet: 26622.745159359358,
+    totalInvestedGross: 368740.5991177818,
+    totalInvestedNet: 353151.9202096612,
+    payoffMonth: 296,
+  });
+
+  // Lump sum applied on month 12
+  expect(annuityData.monthly[11].capitalPaid).toBeCloseTo(6142.3083856066405);
+
+  // Balance stays at 0 (loan settled) past the payoff month
+  expect(annuityData.monthly[359].balance).toBe(0);
+  expect(annuityData.monthly[359].capitalPaid).toBe(0);
+});
+
+it('calculates linear data with overpayment (recurring + lump sum)', () => {
+  const figures = calgulateLoanFigures(state);
+  const overpayment = { monthly: 500, lumpSum: { month: 12, amount: 5000 } };
+
+  const linearData = calculateLinearData(
+    state.interest,
+    state.deduction,
+    state.savings,
+    figures.loan,
+    overpayment,
+  );
+
+  expect(linearData.totals.payoffMonth).toBe(218);
+  expect(linearData.totals).toEqual({
+    totalPaidGross: 320901.40053143,
+    totalPaidNet: 308207.7376612497,
+    totalInterestGross: 34372.225481128145,
+    totalInterestNet: 21678.562610947876,
+    totalInvestedGross: 360901.40053143,
+    totalInvestedNet: 348207.7376612497,
+    payoffMonth: 218,
+  });
+
+  expect(linearData.monthly[11].capitalPaid).toBeCloseTo(6295.914375139728);
+  expect(linearData.monthly[359].balance).toBe(0);
+  expect(linearData.monthly[359].capitalPaid).toBe(0);
+});
+
+it('calculates the break-even month vs. renting', () => {
+  const figures = calgulateLoanFigures(state);
+  const annuityData = calculateAnnuityData(
+    state.interest,
+    state.deduction,
+    state.savings,
+    figures.loan,
+  );
+
+  expect(
+    calculateBreakEvenMonth(annuityData.monthly, figures.cost, state.rent),
+  ).toBe(38);
+
+  // Rent too low to ever beat the mortgage payment within the schedule.
+  expect(
+    calculateBreakEvenMonth(annuityData.monthly, figures.cost, 500),
+  ).toBeNull();
 });
 
 it('calculates savings vs total invested curve', () => {
   for (let s = 0; s < 21; s++) {
     state.savings = 20000 + s * 1000;
     const figures = calgulateLoanFigures(state);
-    const annuityData = calculateAnnuityData(
+    calculateAnnuityData(
       state.interest,
       state.deduction,
       state.savings,

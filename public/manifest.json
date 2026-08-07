@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Mortgage Calculator",
+  "name": "Annuity and Linear mortgage calculator for the Netherlands",
   "icons": [
     {
       "src": "favicon.ico",
